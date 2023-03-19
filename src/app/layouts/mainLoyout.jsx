@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import GoodsAndServices from "../main/goodsAndServices";
-import Showcases from "../main/showcases";
+import GoodsAndServices from "../components/main/goodsAndServices";
+import Showcases from "../components/main/showcases";
 
 const MainLoyout = () => {
   const { pathname } = useLocation();

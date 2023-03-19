@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/header";
-import MainLoyout from "./components/layouts/mainLoyout";
+import MainLoyout from "./layouts/mainLoyout";
 import MyShowcases from "./components/main/myShowcases";
 import StatisticsAndAnalytics from "./components/main/statisticsAndAnalytics";
 
