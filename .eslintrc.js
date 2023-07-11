@@ -6,17 +6,27 @@ module.exports = {
   extends: ["plugin:react/recommended", "standard"],
   overrides: [],
   parserOptions: {
-    ecmaVersion: "latest",
+    ecmaFeatures: {
+      jsx: true
+    },
+    ecmaVersion: 12,
     sourceType: "module"
   },
   plugins: ["react"],
   rules: {
-    indent: ["error", 2, { ignoredNodes: ["ConditionalExpression"] }],
+    indent: [0, 4],
+    // indent: ["error", 2, { ignoredNodes: ["ConditionalExpression"] }],
     semi: [2, "always"],
+    "react/display-name": "off",
     "space-before-function-paren": [
       "error",
       { anonymous: "always", named: "never" }
     ],
-    quotes: ["error", "double", { allowTemplateLiterals: true }]
+    quotes: [
+      "error",
+      "double",
+      { allowTemplateLiterals: true, avoidEscape: true }
+    ],
+    "multiline-ternary": ["off"]
   }
 };
