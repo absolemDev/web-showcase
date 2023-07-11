@@ -1,0 +1,36 @@
+.navbar .nav-item > .nav-link.active,
+.rate.badge,
+.main-panel > .badge {
+  background-color: #e65100 !important;
+}
+
+.list-group-item.list-group-item-action.active,
+.btn-public {
+  background-color: #e65100 !important;
+  border-color: #e65100 !important;
+}
+
+.tab-content .btn.submit {
+  background-color: #22242a !important;
+  border-color: #22242a !important;
+}
+
+.card:hover .overlay {
+  opacity: 0.75 !important;
+}
+
+.nav-profile {
+  color: #e65100;
+}
+
+.nav-tabs .nav-link {
+  color: #a69b9e !important;
+  background-color: #22242a !important;
+  border-color: #22242a !important;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #e65100 !important;
+  border-color: #e65100 !important;
+  color: white !important;
+}
