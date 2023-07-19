@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 const CardAddShowcase = () => {
   return (
-    <LinkContainer to="/showcase-settings">
+    <LinkContainer to="/my-showcases/create">
       <Card className="bg-dark text-white col-lg-5 m-4" role="button">
         <Card.Body className="text-center">
           <i className="bi bi-plus-square fs-1"></i>

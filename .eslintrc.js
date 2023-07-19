@@ -27,6 +27,7 @@ module.exports = {
       "double",
       { allowTemplateLiterals: true, avoidEscape: true }
     ],
-    "multiline-ternary": ["off"]
+    "multiline-ternary": ["off"],
+    "react/react-in-jsx-scope": "off"
   }
 };

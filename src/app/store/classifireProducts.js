@@ -4,6 +4,7 @@ import productClassifireService from "../services/productClassifire.service";
 const initialState = {
   entities: [],
   isLoading: false,
+  dataLoaded: false,
   error: null
 };
 
@@ -17,14 +18,15 @@ const classifireProductsSlice = createSlice({
     classifireProductsReceved: (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;
+      state.dataLoaded = true;
     },
     classifireProductsRequestFiled: (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
+      state.dataLoaded = false;
     },
-    clearedClassifire: (state) => {
+    classifireProductsCleared: (state) => {
       state.entities = [];
-      state.isLoading = false;
     }
   }
 });
@@ -33,11 +35,10 @@ const { reducer: classifireProductsReducer, actions } = classifireProductsSlice;
 const {
   classifireProductsRequested,
   classifireProductsReceved,
-  classifireProductsRequestFiled,
-  clearedClassifire
+  classifireProductsRequestFiled
 } = actions;
 
-export const searchProductsInClassifire = (name) => async (dispatch) => {
+export const loadClassifireProducts = (name) => async (dispatch) => {
   dispatch(classifireProductsRequested());
   try {
     const data = await productClassifireService.search(name);
@@ -47,13 +48,11 @@ export const searchProductsInClassifire = (name) => async (dispatch) => {
   }
 };
 
-export const clearClassifire = () => (dispatch) => {
-  dispatch(clearedClassifire());
-};
-
 export const getClassifireProducts = () => (state) =>
   state.classifireProducts.entities;
 export const getClassifireProductsLoadingStatus = () => (state) =>
   state.classifireProducts.isLoading;
+export const getClassifireProductsDataLoadedStatus = () => (state) =>
+  state.user.dataLoaded;
 
 export default classifireProductsReducer;

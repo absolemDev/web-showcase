@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuthErrors, getUserLoadingStatus, logIn } from "../../store/users";
-import { useHistory } from "react-router-dom";
+import { getServerError, getUserLoadingStatus, logIn } from "../../store/user";
 import { Alert, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [data, setData] = useState({
@@ -13,11 +13,10 @@ const LoginForm = () => {
   });
   const [errors, setErrors] = useState({});
   const isValid = Object.keys(errors).length === 0;
-  const loginError = useSelector(getAuthErrors());
+  const loginError = useSelector(getServerError());
   const userIsLoading = useSelector(getUserLoadingStatus());
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const handleChange = (target) => {
     setData((prevState) => ({
@@ -49,13 +48,13 @@ const LoginForm = () => {
     return Object.keys(errors).length === 0;
   };
 
+  const navigate = useNavigate();
+  const redirect = () => navigate("/showcases");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
-    const redirect = history.location.state
-      ? history.location.state.from.pathname
-      : "/my-showcases";
-    dispatch(logIn({ payload: data, redirect }));
+    dispatch(logIn(data, redirect));
   };
 
   return (

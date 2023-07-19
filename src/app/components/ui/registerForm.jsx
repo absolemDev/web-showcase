@@ -3,8 +3,9 @@ import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuthErrors, getUserLoadingStatus, signUp } from "../../store/users";
+import { getServerError, getUserLoadingStatus, signUp } from "../../store/user";
 import { Alert, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [data, setData] = useState({
@@ -15,7 +16,7 @@ const RegisterForm = () => {
   });
   const [errors, setErrors] = useState({});
   const isValid = Object.keys(errors).length === 0;
-  const authError = useSelector(getAuthErrors());
+  const authError = useSelector(getServerError());
   const userIsLoading = useSelector(getUserLoadingStatus());
 
   const dispatch = useDispatch();
@@ -78,10 +79,13 @@ const RegisterForm = () => {
     return Object.keys(errors).length === 0;
   };
 
+  const navigate = useNavigate();
+  const redirect = () => navigate("/showcases");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
-    dispatch(signUp(data));
+    dispatch(signUp(data, redirect));
   };
 
   return (

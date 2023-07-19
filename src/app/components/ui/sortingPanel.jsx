@@ -62,7 +62,7 @@ const SortingPanel = ({ onSort, selectedSort }) => {
 };
 
 SortingPanel.propTypes = {
-  onSort: PropTypes.func.isRequired,
+  onSort: PropTypes.func,
   selectedSort: PropTypes.object
 };
 

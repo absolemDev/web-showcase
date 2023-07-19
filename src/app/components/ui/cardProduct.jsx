@@ -12,9 +12,7 @@ const CardProduct = ({ _id, name, img, about, price, rate, showcase }) => {
     : getNameShowcase(showcase);
   return (
     <Card className="card-product col-md-6 col-lg-4">
-      <LinkContainer
-        to={`/products/${_id}?${!currentShowcase ? "linkToShowcase=true" : ""}`}
-      >
+      <LinkContainer to={`/products/${_id}}`}>
         <div className="position-relative">
           <Card.Img variant="top" src={img} role="button" />
           <Badge

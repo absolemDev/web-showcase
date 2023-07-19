@@ -1,11 +1,11 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BackHistoryButton = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   return (
-    <Button className="py-0 border-0" onClick={() => history.goBack()}>
+    <Button className="py-0 border-0" onClick={() => navigate(-1)}>
       <i className="bi bi-caret-left-fill"></i>
       Назад
     </Button>

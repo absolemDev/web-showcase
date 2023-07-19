@@ -4,12 +4,12 @@ import RegisterForm from "../../ui/registerForm";
 import LoginForm from "../../ui/loginForm";
 import { Tab, Tabs } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuthErrors } from "../../../store/users";
+import { getServerError } from "../../../store/user";
 
 const LoginPage = () => {
   const { type } = useParams();
   const dispatch = useDispatch();
-  const authError = useSelector(getAuthErrors());
+  const authError = useSelector(getServerError());
   const handleSelect = () => {
     if (authError) {
       dispatch({ type: "user/authErrorFixed" });

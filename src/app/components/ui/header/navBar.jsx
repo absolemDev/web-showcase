@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { useLocation } from "react-router-dom";
-import { getIsLoggedIn, logOut } from "../../../store/users";
+import { getIsLoggedIn, logOut } from "../../../store/user";
 
 const NavBar = () => {
   const { pathname } = useLocation();
@@ -49,7 +49,7 @@ const NavBar = () => {
         <Nav>
           {isLoggedIn ? (
             <i
-              className="bi bi-box-arrow-in-left fs-4 nav-profile"
+              className="bi bi-box-arrow-left fs-4 nav-profile"
               role="button"
               onClick={handleLogOut}
             ></i>

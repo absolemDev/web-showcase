@@ -1,12 +1,12 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavProfile = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   return (
     <div className="nav-profile">
-      <Button variant="link" onClick={() => history.push("/login")}>
+      <Button variant="link" onClick={() => navigate("/login")}>
         Вход
       </Button>
     </div>

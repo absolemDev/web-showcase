@@ -1,3 +1,7 @@
+#app {
+  min-height: 100vh;
+}
+
 .navbar .nav-item > .nav-link.active,
 .rate.badge,
 .main-panel > .badge {
@@ -33,4 +37,56 @@
   background-color: #e65100 !important;
   border-color: #e65100 !important;
   color: white !important;
+}
+
+.classifire-item:hover {
+  background-color: #d3d3d3 !important;
+}
+
+.left-hidd-content {
+  background-image: linear-gradient(-90deg, #ffffff82, #ffffffd9, #ffffff);
+  bottom: 0;
+  top: 0;
+  left: 0;
+  width: 1rem;
+  z-index: 100;
+}
+
+.right-hidd-content {
+  background-image: linear-gradient(90deg, #ffffff82, #ffffffd9, #ffffff);
+  bottom: 0;
+  top: 0;
+  right: 0;
+  width: 1rem;
+  z-index: 100;
+}
+
+.list-group-item:hover .left-hidd-content {
+  background-image: linear-gradient(-90deg, #f9fafb82, #f9fafbd9, #f9fafb);
+}
+
+.list-group-item.active .left-hidd-content {
+  background-image: linear-gradient(-90deg, #e6510082, #e65100d9, #e65100);
+}
+
+.list-group-item:hover .right-hidd-content {
+  background-image: linear-gradient(90deg, #f9fafb82, #f9fafbd9, #f9fafb);
+}
+
+.list-group-item.active .right-hidd-content {
+  background-image: linear-gradient(90deg, #e6510082, #e65100d9, #e65100);
+}
+
+.list-group-item .content-animation:hover {
+  animation: animFilterContent 5s linear 0s 1 normal forwards;
+}
+
+@keyframes animFilterContent {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }

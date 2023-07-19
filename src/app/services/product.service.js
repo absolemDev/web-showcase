@@ -7,26 +7,24 @@ const productService = {
     const { data } = await httpService.get(productEndpoint);
     return data;
   },
-  create: async (payload, { showcaseId }) => {
+  create: async (payload, idShowcase) => {
     const { data } = await httpService.post(productEndpoint, payload, {
-      params: { showcaseId }
+      params: { idShowcase }
     });
     return data;
   },
-  update: async (payload, { showcaseId, productId }) => {
+  update: async (payload, idShowcase, idProduct) => {
     const { data } = await httpService.patch(
-      productEndpoint + productId,
+      productEndpoint + idProduct,
       payload,
-      { params: { showcaseId } }
+      { params: { idShowcase } }
     );
     return data;
   },
-  remove: async (payload, { showcaseId, productId }) => {
-    const { data } = await httpService.delete(
-      productEndpoint + productId,
-      payload,
-      { params: { showcaseId } }
-    );
+  remove: async (idShowcase, idProduct) => {
+    const { data } = await httpService.delete(productEndpoint + idProduct, {
+      params: { idShowcase }
+    });
     return data;
   }
 };
