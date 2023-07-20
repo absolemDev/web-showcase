@@ -6,11 +6,12 @@ import BackHistoryButton from "../components/common/backButton";
 import { useSelector } from "react-redux";
 import { getCategories } from "../store/categories";
 import FilterGroupList from "../components/ui/filterGroupList";
-import { useApp } from "../hooks/useApp";
+import { useDataProcessing } from "../hooks/useDataProcessing";
+import withDataProcessing from "../components/ui/hoc/withDataProcessing";
 
 const MainLayout = () => {
   const categories = useSelector(getCategories());
-  const { filter, setFilter } = useApp();
+  const { filter, handleSort } = useDataProcessing();
 
   return (
     <div>
@@ -21,7 +22,7 @@ const MainLayout = () => {
           <FilterGroupList
             items={categories}
             selectedValue={filter}
-            onSelect={setFilter}
+            onSelect={handleSort}
             valueProperty="classifire"
           />
         </div>
@@ -39,4 +40,6 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout;
+const MainLayoutWhithDataProcessing = withDataProcessing(MainLayout);
+
+export default MainLayoutWhithDataProcessing;

@@ -83,7 +83,9 @@ const ProductForm = ({ product, idShowcase, onCloseForm, index }) => {
   const handleSubmit = () => {
     if (validate()) {
       if (product) {
-        dispatch(updateProductData(data, idShowcase, product._id));
+        dispatch(updateProductData(data, idShowcase, product._id)).then(() =>
+          onCloseForm()
+        );
       } else {
         dispatch(createProduct(data, idShowcase)).then(() => onCloseForm());
       }

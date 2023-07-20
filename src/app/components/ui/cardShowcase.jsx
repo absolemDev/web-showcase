@@ -3,7 +3,7 @@ import { Badge, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import PropTypes from "prop-types";
 
-const CardShowcase = ({ _id, name, about, address, img, rate }) => {
+const CardShowcase = ({ _id, name, description, address, img, rate }) => {
   return (
     <LinkContainer to={`/showcases/${_id}`}>
       <Card className="bg-dark text-white col-lg-6 border-white" role="button">
@@ -17,7 +17,9 @@ const CardShowcase = ({ _id, name, about, address, img, rate }) => {
             </Badge>
           </Card.Title>
           <Card.Subtitle className="mb-2 text-white">
-            {about.length > 265 ? about.slice(0, 265) + " ..." : about}
+            {description.length > 265
+              ? description.slice(0, 265) + " ..."
+              : description}
           </Card.Subtitle>
           <Card.Text className="mt-auto">{address}</Card.Text>
         </Card.ImgOverlay>
@@ -29,7 +31,7 @@ const CardShowcase = ({ _id, name, about, address, img, rate }) => {
 CardShowcase.propTypes = {
   _id: PropTypes.string,
   name: PropTypes.string,
-  about: PropTypes.string,
+  description: PropTypes.string,
   address: PropTypes.string,
   img: PropTypes.string,
   rate: PropTypes.number

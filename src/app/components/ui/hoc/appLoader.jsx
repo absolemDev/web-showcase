@@ -35,7 +35,9 @@ const AppLoader = ({ children }) => {
     return children;
   } else {
     return (
-      <Spinner className="mx-auto" animation="border" variant="secondary" />
+      <div className="spinner-wrapper">
+        <Spinner animation="border" variant="secondary" />
+      </div>
     );
   }
 };

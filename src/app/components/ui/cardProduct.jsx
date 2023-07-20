@@ -5,7 +5,15 @@ import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { useShowcases } from "../../hooks/useShowcases";
 
-const CardProduct = ({ _id, name, img, about, price, rate, showcase }) => {
+const CardProduct = ({
+  _id,
+  name,
+  img,
+  description,
+  price,
+  rate,
+  showcase
+}) => {
   const { currentShowcase, getNameShowcase } = useShowcases();
   const nameShowcase = currentShowcase
     ? currentShowcase.name
@@ -45,7 +53,9 @@ const CardProduct = ({ _id, name, img, about, price, rate, showcase }) => {
           <Card.Title role="button">{name}</Card.Title>
         </LinkContainer>
         <Card.Text>
-          {about.length > 70 ? about.slice(0, 70) + " ..." : about}
+          {description.length > 70
+            ? description.slice(0, 70) + " ..."
+            : description}
         </Card.Text>
         <div className="mt-auto">
           <Card.Text>Цена: {price}</Card.Text>
@@ -58,7 +68,7 @@ const CardProduct = ({ _id, name, img, about, price, rate, showcase }) => {
 CardProduct.propTypes = {
   _id: PropTypes.string,
   name: PropTypes.string,
-  about: PropTypes.string,
+  description: PropTypes.string,
   img: PropTypes.string,
   price: PropTypes.number,
   rate: PropTypes.number,

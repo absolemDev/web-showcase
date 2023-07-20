@@ -40,7 +40,7 @@ const productsSlice = createSlice({
         (item) => item._id === action.payload._id
       );
       state.entities[index] = action.payload;
-      state.isLoading = true;
+      state.isLoading = false;
     },
     productUpdateFiled: (state, action) => {
       state.isLoading = false;
