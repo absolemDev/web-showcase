@@ -22,11 +22,18 @@ const DataProcessingProvider = ({ children }) => {
   const products = useSelector(getProducts());
 
   const handleSearch = (value) => {
-    setSearch(new RegExp(`^${value}|[^а-яА-Я]${value}`, "i"));
+    const trimedValue = value.trim();
+    if (trimedValue) {
+      if (filter) setFilter(null);
+      setSearch(new RegExp(`^${trimedValue}|[^а-яА-Я]${trimedValue}`, "i"));
+    }
   };
+
   const handleFilter = (value) => {
+    if (search) setSearch(null);
     setFilter(value);
   };
+
   const handleSort = (value) => {
     setSort(value);
   };
@@ -35,18 +42,22 @@ const DataProcessingProvider = ({ children }) => {
 
   useEffect(() => {
     const target = pathname.split("/")[1];
-    const arrTargets =
-      (target === "showcases" && showcases) ||
-      (target === "products" && products);
+    const arrTargets = target === "showcases" ? showcases : products;
     const filteredTargets = search
       ? arrTargets.filter((item) => search.test(item.name))
       : filter
-      ? arrTargets.filter((item) => item.classifire === filter)
+      ? arrTargets.filter((item) => {
+          if (target === "showcases") {
+            return item.classifire.includes(filter);
+          } else {
+            return item.classifire === filter;
+          }
+        })
       : arrTargets;
     const sortedTargets = sorting([...filteredTargets], sort);
     // const usersCrop = paginate(sortedUsers, currentPage, pageSize);
     setEntities(sortedTargets);
-  }, []);
+  }, [filter, search, sort]);
 
   return (
     <DataProcessingContext.Provider

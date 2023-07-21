@@ -95,15 +95,22 @@ export const loadProductsList = () => async (dispatch) => {
 export const createProduct = (payload, idSowcase) => async (dispatch) => {
   dispatch(productCreateRequested());
   try {
-    const data = await productService.create(payload, idSowcase);
-    if (data.category) {
+    const { product, showcase, category } = await productService.create(
+      payload,
+      idSowcase
+    );
+    dispatch(productCreateSaccess(product));
+    if (category) {
       dispatch({
         type: "categories/categoryCreateSaccess",
-        payload: data.category
+        payload: category
       });
-      dispatch(productCreateSaccess(data.newProduct));
-    } else {
-      dispatch(productCreateSaccess(data));
+    }
+    if (showcase) {
+      dispatch({
+        type: "showcase/updateShowcaseSaccess",
+        payload: showcase
+      });
     }
   } catch (error) {
     dispatch(productsRequestFiled(error.message));
@@ -114,15 +121,26 @@ export const updateProductData =
   (payload, idShowcase, idProduct) => async (dispatch) => {
     dispatch(productUpdateRequested());
     try {
-      const data = await productService.update(payload, idShowcase, idProduct);
-      if (data.category) {
+      const { product, showcase, categoryNew, categoryRemoved } =
+        await productService.update(payload, idShowcase, idProduct);
+      dispatch(productUpdateSaccess(product));
+      if (showcase) {
+        dispatch({
+          type: "showcases/updateShowcaseSaccess",
+          payload: showcase
+        });
+      }
+      if (categoryNew) {
         dispatch({
           type: "categories/categoryCreateSaccess",
-          payload: data.category
+          payload: categoryNew
         });
-        dispatch(productUpdateSaccess(data.newProduct));
-      } else {
-        dispatch(productUpdateSaccess(data));
+      }
+      if (categoryRemoved) {
+        dispatch({
+          type: "categories/categoryRemoved",
+          payload: { id: categoryRemoved }
+        });
       }
     } catch (error) {
       dispatch(productUpdateFiled(error.message));

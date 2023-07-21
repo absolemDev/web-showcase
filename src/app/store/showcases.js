@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const showcasesSlice = createSlice({
-  name: "showcase",
+  name: "showcases",
   initialState,
   reducers: {
     showcasesRequested: (state) => {
@@ -22,7 +22,6 @@ const showcasesSlice = createSlice({
       state.isLoading = true;
     },
     showcasesReceved: (state, action) => {
-      console.log("showcasesReceved");
       state.entities = action.payload;
       state.isLoading = false;
       state.dataLoaded = true;
