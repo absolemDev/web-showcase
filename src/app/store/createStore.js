@@ -4,13 +4,15 @@ import showcasesReducer from "./showcases";
 import productsdReducer from "./products";
 import classifireProductsReducer from "./classifireProducts";
 import categoriesReducer from "./categories";
+import commentsReducer from "./comments";
 
 const rootReducer = combineReducers({
   user: userReducer,
   showcases: showcasesReducer,
   products: productsdReducer,
   classifireProducts: classifireProductsReducer,
-  categories: categoriesReducer
+  categories: categoriesReducer,
+  comments: commentsReducer
 });
 
 export function createStore() {

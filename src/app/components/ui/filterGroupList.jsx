@@ -7,7 +7,8 @@ const FilterGroupList = ({
   valueProperty,
   contentProperty,
   onSelect,
-  selectedValue
+  selectedValue,
+  disabled
 }) => {
   return (
     <ListGroup>
@@ -20,6 +21,7 @@ const FilterGroupList = ({
           key={item[valueProperty]}
           className="overflow-hidden p-0 position-relative"
           role="button"
+          disabled={disabled}
         >
           <div className="left-hidd-content position-absolute">&nbsp;</div>
           <div
@@ -32,9 +34,16 @@ const FilterGroupList = ({
           <div className="right-hidd-content position-absolute">&nbsp;</div>
         </ListGroup.Item>
       ))}
-      <ListGroup.Item action onClick={() => onSelect(null)} variant="dark">
-        Сбросить
-      </ListGroup.Item>
+      {selectedValue && (
+        <ListGroup.Item
+          action
+          onClick={() => onSelect(null)}
+          variant="dark"
+          disabled={disabled}
+        >
+          Сбросить
+        </ListGroup.Item>
+      )}
     </ListGroup>
   );
 };
@@ -49,7 +58,8 @@ FilterGroupList.propTypes = {
   valueProperty: PropTypes.string,
   contentProperty: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
-  selectedValue: PropTypes.string
+  selectedValue: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 export default FilterGroupList;

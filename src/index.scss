@@ -9,7 +9,9 @@
 }
 
 .list-group-item.list-group-item-action.active,
-.btn-public {
+.btn-public,
+.back-history-button,
+.add-rating-button {
   background-color: #e65100 !important;
   border-color: #e65100 !important;
 }
@@ -23,7 +25,8 @@
   opacity: 0.75 !important;
 }
 
-.nav-profile {
+.nav-profile,
+.rating {
   color: #e65100;
 }
 
@@ -96,4 +99,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.input-search {
+  outline: none !important;
+  box-shadow: none !important;
 }

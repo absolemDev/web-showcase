@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +23,7 @@ const LoginForm = () => {
       ...prevState,
       [target.name]: target.value
     }));
+    if (errors[target.name]) delete errors[target.name];
   };
 
   const validatorConfig = {
@@ -37,10 +38,6 @@ const LoginForm = () => {
       }
     }
   };
-
-  useEffect(() => {
-    validate();
-  }, [data]);
 
   const validate = () => {
     const errors = validator(data, validatorConfig);

@@ -138,16 +138,19 @@ export const getShowcaseById = (id) => (state) => {
 };
 export const getUserShowcaseById = (id) => (state) => {
   return state.showcases.entities.find(
-    (item) => item._id === id && item.owner === state.user.auth
+    (item) => item._id === id && item.owner === state.user.auth._id
   );
+};
+export const getShowcaseNameById = (id) => (state) => {
+  return state.showcases.entities.find((item) => item._id === id).name;
 };
 export const getUserShowcaseAccess = (id) => (state) => {
   return !!state.showcases.entities.find(
-    (item) => item._id === id && item.owner === state.user.auth
+    (item) => item._id === id && item.owner === state.user.auth._id
   );
 };
 export const getUserShowcases = () => (state) =>
-  state.showcases.entities.filter((item) => item.owner === state.user.auth);
+  state.showcases.entities.filter((item) => item.owner === state.user.auth._id);
 export const getShowcasesLoadingStatus = () => (state) =>
   state.showcases.isLoading;
 export const getShowcasesDataLoadedStatus = () => (state) =>

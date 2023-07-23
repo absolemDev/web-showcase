@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 const BackHistoryButton = () => {
   const navigate = useNavigate();
   return (
-    <Button className="py-0 border-0" onClick={() => navigate(-1)}>
+    <Button
+      className="back-history-button py-0 border-0"
+      onClick={() => navigate(-1)}
+    >
       <i className="bi bi-caret-left-fill"></i>
       Назад
     </Button>

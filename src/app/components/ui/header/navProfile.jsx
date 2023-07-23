@@ -6,7 +6,7 @@ const NavProfile = () => {
   const navigate = useNavigate();
   return (
     <div className="nav-profile">
-      <Button variant="link" onClick={() => navigate("/login")}>
+      <Button variant="link" onClick={() => navigate("/authorization")}>
         Вход
       </Button>
     </div>

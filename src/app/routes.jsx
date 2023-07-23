@@ -21,13 +21,17 @@ const routes = (isLoggedIn) => [
     children: [
       {
         path: "showcases",
-        element: <MainPage />,
-        children: [{ path: ":id", element: <Showcase /> }]
+        children: [
+          { path: "", element: <MainPage /> },
+          { path: ":id", element: <Showcase /> }
+        ]
       },
       {
         path: "products",
-        element: <MainPage />,
-        children: [{ path: ":id", element: <Product /> }]
+        children: [
+          { path: "", element: <MainPage /> },
+          { path: ":id", element: <Product /> }
+        ]
       }
     ]
   },
@@ -56,7 +60,10 @@ const routes = (isLoggedIn) => [
   {
     element: <ServicesLayout />,
     children: [
-      { path: "login", element: <LoginPage /> },
+      {
+        path: "authorization/:type?",
+        element: isLoggedIn ? <Navigate to="/showcases" /> : <LoginPage />
+      },
       {
         path: "statistics-and-analytics",
         element: <StatisticsAndAnalyticsPage />

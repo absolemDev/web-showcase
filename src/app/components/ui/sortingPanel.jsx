@@ -1,69 +1,65 @@
 import React from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
-import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
+import { useDataProcessing } from "../../hooks/useDataProcessing";
 
-const SortingPanel = ({ onSort, selectedSort }) => {
-  const { target, id } = useParams();
-  const sortFields = {
-    name: {
+const SortingPanel = () => {
+  const { sortBy, handleSort, isProductPage, isShowcasesPage } =
+    useDataProcessing();
+  const sortFields = [
+    {
+      path: "name",
       label: "Название",
-      hidden: target === "products" && id
+      hidden: isProductPage()
     },
-    rate: {
+    {
+      path: "rate",
       label: "Рейтинг",
-      hidden: target === "products" && id
+      hidden: isProductPage()
     },
-    price: {
+    {
+      path: "price",
       label: "Цена",
-      hidden: (target === "products" && id) || (target === "showcases" && !id)
+      hidden: isProductPage() || isShowcasesPage()
     }
-  };
+  ];
 
   const renderSortArrow = (field) => {
-    if (field === selectedSort.path) {
-      return selectedSort.order === "asc" ? (
-        <i className="bi bi-caret-down-fill"></i>
-      ) : (
+    if (field.path === sortBy.path) {
+      return sortBy.order === "asc" ? (
         <i className="bi bi-caret-up-fill"></i>
+      ) : (
+        <i className="bi bi-caret-down-fill"></i>
       );
     }
     return <i className="p-2"></i>;
   };
 
-  const handelSort = (field) => {
-    if (selectedSort.path === field) {
-      onSort({
-        ...selectedSort,
-        order: selectedSort.order === "asc" ? "desc" : "asc"
+  const handleClick = (field) => {
+    if (sortBy.path === field.path) {
+      handleSort({
+        ...sortBy,
+        order: sortBy.order === "asc" ? "desc" : "asc"
       });
     } else {
-      onSort({ path: field, order: "asc" });
+      handleSort({ path: field.path, order: "asc" });
     }
   };
 
   return (
     <ButtonGroup className="ms-auto">
-      {Object.keys(sortFields).map((field) => (
+      {sortFields.map((field) => (
         <Button
-          key={field}
-          className={`py-0 border-0${
-            sortFields[field].hidden ? " d-none" : ""
-          }`}
+          key={field.path}
+          className={`py-0 border-0${field.hidden ? " d-none" : ""}`}
           variant="dark"
-          onClick={() => handelSort(field)}
+          onClick={() => handleClick(field)}
         >
           {renderSortArrow(field)}
-          {sortFields[field].label}
+          {field.label}
         </Button>
       ))}
     </ButtonGroup>
   );
-};
-
-SortingPanel.propTypes = {
-  onSort: PropTypes.func,
-  selectedSort: PropTypes.object
 };
 
 export default SortingPanel;

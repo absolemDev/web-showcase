@@ -1,21 +1,19 @@
 import React from "react";
 import CardList from "../../common/cardList";
 import CardShowcase from "../../ui/cardShowcase";
-import { useLocation } from "react-router-dom";
 import CardProduct from "../../ui/cardProduct";
 import { useDataProcessing } from "../../../hooks/useDataProcessing";
 
 const MainPage = () => {
-  const { pathname } = useLocation();
-  const { entities } = useDataProcessing();
+  const { getEntities, isShowcasesPage } = useDataProcessing();
+  const entities = getEntities();
+
+  const renderTextForEmptyItems = () =>
+    `Список ${isShowcasesPage() ? "витрин" : "товаров и услуг"} пуст`;
 
   return (
-    <CardList items={entities}>
-      {pathname.split("/")[1] === "showcases" ? (
-        <CardShowcase />
-      ) : (
-        <CardProduct />
-      )}
+    <CardList items={entities} textForEmptyItems={renderTextForEmptyItems()}>
+      {isShowcasesPage() ? <CardShowcase /> : <CardProduct />}
     </CardList>
   );
 };

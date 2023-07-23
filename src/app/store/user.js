@@ -7,7 +7,7 @@ import { generateServerError } from "../utils/generateServerError";
 const initialState = localStorageService.getAccessToken()
   ? {
       auth: {
-        userId: localStorageService.getUserId()
+        _id: localStorageService.getUserId()
       },
       name: null,
       isLoggedIn: true,
@@ -29,8 +29,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     userRequestSuccess: (state, action) => {
-      state.auth = action.payload._id;
-      state.name = action.payload.name;
+      state.auth = action.payload;
       state.isLoggedIn = true;
       state.dataLoaded = true;
       state.isLoading = false;
@@ -42,7 +41,6 @@ const userSlice = createSlice({
     userLoggedOut: (state) => {
       state.auth = null;
       state.isLoggedIn = false;
-      state.name = null;
     },
     userRequested: (state) => {
       state.error = null;
@@ -87,6 +85,7 @@ export const signUp = (payload, redirect) => async (dispatch) => {
     dispatch(userRequestSuccess(data.userData));
     redirect();
   } catch (error) {
+    console.log(error);
     const errorMessage = error.response
       ? generateServerError(error.response.data.error.message)
       : generateServerError(error.message);
@@ -126,5 +125,6 @@ export const getUserLoadingStatus = () => (state) => state.user.isLoading;
 export const getUserDataLoadedStatus = () => (state) => state.user.dataLoaded;
 export const getIsLoggedIn = () => (state) => state.user.isLoggedIn;
 export const getServerError = () => (state) => state.user.error;
+export const getUserId = () => (state) => state.user.auth?._id;
 
 export default userReducer;

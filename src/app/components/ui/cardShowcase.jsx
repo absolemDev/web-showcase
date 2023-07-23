@@ -12,9 +12,12 @@ const CardShowcase = ({ _id, name, description, address, img, rate }) => {
         <Card.ImgOverlay className="d-flex align-items-start flex-column">
           <Card.Title className="d-flex w-100">
             <div>{name}</div>
-            <Badge className="rate ms-auto">
-              <i className="bi bi-star-fill"></i> {rate}
-            </Badge>
+            {rate.amount > 0 && (
+              <Badge className="rate ms-auto">
+                <i className="bi bi-star-fill"></i>{" "}
+                {Math.round(rate.count / rate.amount)}
+              </Badge>
+            )}
           </Card.Title>
           <Card.Subtitle className="mb-2 text-white">
             {description.length > 265
@@ -34,7 +37,7 @@ CardShowcase.propTypes = {
   description: PropTypes.string,
   address: PropTypes.string,
   img: PropTypes.string,
-  rate: PropTypes.number
+  rate: PropTypes.object
 };
 
 export default CardShowcase;

@@ -108,7 +108,7 @@ export const createProduct = (payload, idSowcase) => async (dispatch) => {
     }
     if (showcase) {
       dispatch({
-        type: "showcase/updateShowcaseSaccess",
+        type: "showcases/updateShowcaseSaccess",
         payload: showcase
       });
     }
@@ -151,7 +151,7 @@ export const removeProduct = (idShowcase, idProduct) => async (dispatch) => {
   console.log(idProduct);
   dispatch(productRemoveRequested());
   try {
-    const { categoryRemove } = await productService.remove(
+    const { categoryRemove, showcase } = await productService.remove(
       idShowcase,
       idProduct
     );
@@ -162,12 +162,20 @@ export const removeProduct = (idShowcase, idProduct) => async (dispatch) => {
         payload: { id: categoryRemove }
       });
     }
+    if (showcase) {
+      dispatch({
+        type: "showcases/updateShowcaseSaccess",
+        payload: showcase
+      });
+    }
   } catch (error) {
     dispatch(productRemoveFiled(error.message));
   }
 };
 
 export const getProducts = () => (state) => state.products.entities;
+export const getProductById = (id) => (state) =>
+  state.products.entities.find((item) => item._id === id);
 export const getShowcaseProducts = (idShowcase) => (state) =>
   state.products.entities.filter((item) => item.showcase === idShowcase);
 export const getProductsDataLoadedStatus = () => (state) =>

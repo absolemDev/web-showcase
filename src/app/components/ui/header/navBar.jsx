@@ -54,7 +54,7 @@ const NavBar = () => {
               onClick={handleLogOut}
             ></i>
           ) : (
-            <LinkContainer to="/login">
+            <LinkContainer to="/authorization">
               <Nav.Link>
                 <i className="bi bi-box-arrow-in-right fs-4 nav-profile"></i>
               </Nav.Link>

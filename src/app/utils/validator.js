@@ -7,7 +7,7 @@ export function validator(data, config) {
         if (typeof data === "boolean") {
           statusValidate = !data;
         } else if (typeof data === "number") {
-          statusValidate = data > 0;
+          statusValidate = data <= 0;
         } else {
           statusValidate = data.trim() === "";
         }

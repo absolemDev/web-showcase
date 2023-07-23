@@ -15,12 +15,17 @@ import {
   loadProductsList
 } from "../../../store/products";
 import { Spinner } from "react-bootstrap";
+import {
+  getCommentsDataLoadedStatus,
+  loadCommentsList
+} from "../../../store/comments";
 
 const AppLoader = ({ children }) => {
   const isLoggedIn = useSelector(getIsLoggedIn());
   const categorieIsLoaded = useSelector(getCategoriesDataLoadedStatus());
   const showcasesIsLoaded = useSelector(getShowcasesDataLoadedStatus());
   const productsIsLoaded = useSelector(getProductsDataLoadedStatus());
+  const commentsIsLoaded = useSelector(getCommentsDataLoadedStatus());
 
   const dispatch = useDispatch();
 
@@ -29,9 +34,15 @@ const AppLoader = ({ children }) => {
     dispatch(loadShowcasesList());
     dispatch(loadProductsList());
     dispatch(loadCategoriesList());
+    dispatch(loadCommentsList());
   }, []);
 
-  if (categorieIsLoaded && showcasesIsLoaded && productsIsLoaded) {
+  if (
+    categorieIsLoaded &&
+    showcasesIsLoaded &&
+    productsIsLoaded &&
+    commentsIsLoaded
+  ) {
     return children;
   } else {
     return (

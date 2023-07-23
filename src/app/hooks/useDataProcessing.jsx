@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { getShowcases } from "../store/showcases";
 import { getProducts } from "../store/products";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { sorting } from "../utils/sorting";
+import { getCategories } from "../store/categories";
 
 const DataProcessingContext = React.createContext();
 
@@ -13,55 +14,100 @@ export const useDataProcessing = () => {
 };
 
 const DataProcessingProvider = ({ children }) => {
-  const [entities, setEntities] = useState([]);
   const [filter, setFilter] = useState(null);
-  const [search, setSearch] = useState(null);
-  const [sort, setSort] = useState({ path: "name", order: "asc" });
+  const [searchRegExp, setSearchRegExp] = useState(null);
+  const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
   // const [currentPage, setCurrentPage] = useState(1);
   const showcases = useSelector(getShowcases());
   const products = useSelector(getProducts());
+  const categories = useSelector(getCategories());
+  const { pathname } = useLocation();
+  const { id } = useParams();
 
-  const handleSearch = (value) => {
-    const trimedValue = value.trim();
-    if (trimedValue) {
-      if (filter) setFilter(null);
-      setSearch(new RegExp(`^${trimedValue}|[^а-яА-Я]${trimedValue}`, "i"));
+  useEffect(() => {
+    if (isShowcasesPage() && sortBy.path === "price") {
+      setSortBy({ path: "name", order: "asc" });
+    }
+    if (searchRegExp) setSearchRegExp(null);
+  }, [pathname]);
+
+  const getListCategories = () => {
+    if (isShowcasePage()) {
+      const classifire = showcases.find((item) => item._id === id).classifire;
+      return classifire.map((item) =>
+        categories.find((i) => i.classifire === item)
+      );
+    } else {
+      return categories;
+    }
+  };
+
+  const getShowcaseName = (idParam) =>
+    idParam
+      ? showcases.find((item) => item._id === idParam).name
+      : showcases.find((item) => item._id === id).name;
+
+  const isProductPage = () => /^\/products\/\w+$/.test(pathname);
+  const isProductsPage = () => /^\/products$/.test(pathname);
+  const isShowcasePage = () => /^\/showcases\/\w+$/.test(pathname);
+  const isShowcasesPage = () => /^\/showcases$/.test(pathname);
+
+  const handleSearchRegExp = (value) => {
+    if (filter) setFilter(null);
+    if (value) {
+      setSearchRegExp(new RegExp(`^${value}|[^а-яА-Я]${value}`, "i"));
+    } else {
+      setSearchRegExp(null);
     }
   };
 
   const handleFilter = (value) => {
-    if (search) setSearch(null);
+    if (searchRegExp) setSearchRegExp(null);
     setFilter(value);
   };
 
   const handleSort = (value) => {
-    setSort(value);
+    setSortBy(value);
   };
 
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    const target = pathname.split("/")[1];
-    const arrTargets = target === "showcases" ? showcases : products;
-    const filteredTargets = search
-      ? arrTargets.filter((item) => search.test(item.name))
+  const getEntities = () => {
+    const arrTargets = isShowcasesPage()
+      ? showcases
+      : isShowcasePage()
+      ? products.filter((item) => item.showcase === id)
+      : products;
+    const filteredTargets = searchRegExp
+      ? arrTargets.filter((item) => searchRegExp.test(item.name))
       : filter
       ? arrTargets.filter((item) => {
-          if (target === "showcases") {
+          if (isShowcasesPage()) {
             return item.classifire.includes(filter);
           } else {
             return item.classifire === filter;
           }
         })
       : arrTargets;
-    const sortedTargets = sorting([...filteredTargets], sort);
+    return sorting([...filteredTargets], sortBy);
     // const usersCrop = paginate(sortedUsers, currentPage, pageSize);
-    setEntities(sortedTargets);
-  }, [filter, search, sort]);
+  };
 
   return (
     <DataProcessingContext.Provider
-      value={{ entities, filter, handleFilter, handleSort, handleSearch }}
+      value={{
+        getEntities,
+        filter,
+        sortBy,
+        searchRegExp,
+        handleFilter,
+        handleSort,
+        handleSearchRegExp,
+        isProductPage,
+        isProductsPage,
+        isShowcasePage,
+        isShowcasesPage,
+        getShowcaseName,
+        getListCategories
+      }}
     >
       {children}
     </DataProcessingContext.Provider>
