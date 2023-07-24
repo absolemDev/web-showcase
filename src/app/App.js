@@ -13,7 +13,7 @@ function App() {
   return (
     <div id="app" className="container d-flex flex-column">
       <Header />
-      <main className="flex-grow-1">
+      <main className="flex-grow-1 d-flex flex-column">
         <AppLoader>{elements}</AppLoader>
       </main>
       <footer>!</footer>
