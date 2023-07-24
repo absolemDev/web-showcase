@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { getIsLoggedIn, loadUserData } from "../../../store/user";
+import {
+  getIsLoggedIn,
+  getUserDataLoadedStatus,
+  loadUserData,
+  loadUsersList
+} from "../../../store/user";
 import {
   getCategoriesDataLoadedStatus,
   loadCategoriesList
@@ -26,6 +31,7 @@ const AppLoader = ({ children }) => {
   const showcasesIsLoaded = useSelector(getShowcasesDataLoadedStatus());
   const productsIsLoaded = useSelector(getProductsDataLoadedStatus());
   const commentsIsLoaded = useSelector(getCommentsDataLoadedStatus());
+  const usersIsLoaded = useSelector(getUserDataLoadedStatus());
 
   const dispatch = useDispatch();
 
@@ -35,13 +41,15 @@ const AppLoader = ({ children }) => {
     dispatch(loadProductsList());
     dispatch(loadCategoriesList());
     dispatch(loadCommentsList());
+    dispatch(loadUsersList());
   }, []);
 
   if (
     categorieIsLoaded &&
     showcasesIsLoaded &&
     productsIsLoaded &&
-    commentsIsLoaded
+    commentsIsLoaded &&
+    usersIsLoaded
   ) {
     return children;
   } else {

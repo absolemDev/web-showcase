@@ -179,8 +179,17 @@ export const getProductById = (id) => (state) =>
 export const getShowcaseProducts = (idShowcase) => (state) =>
   state.products.entities.filter((item) => item.showcase === idShowcase);
 export const getProductsDataLoadedStatus = () => (state) =>
-  state.user.dataLoaded;
+  state.products.dataLoaded;
 export const getProductsLoadingStatus = () => (state) =>
   state.products.isLoading;
+export const getIsOwnerProduct = (productId) => (state) =>
+  state.products.entities.find((item) => item.id === productId).owner ===
+  state.user.auth._id;
+export const getShowcaseByProduct = (productId) => (state) => {
+  const showcaseId = state.products.entities.find(
+    (item) => item._id === productId
+  ).showcase;
+  return state.showcases.entities.find((item) => item._id === showcaseId);
+};
 
 export default productsdReducer;

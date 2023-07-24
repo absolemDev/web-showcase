@@ -11,12 +11,15 @@ export function sorting(arr, { path, order }) {
           if (b.name.toLowerCase() < a.name.toLowerCase()) return -1;
           return 0;
         }
-      case "rate":
+      case "rate": {
+        const rateA = a.rate.count / a.rate.amount || 0;
+        const rateB = b.rate.count / b.rate.amount || 0;
         if (order === "asc") {
-          return a.rate - b.rate;
+          return rateA - rateB;
         } else {
-          return b.rate - a.rate;
+          return rateB - rateA;
         }
+      }
       case "price":
         if (order === "asc") {
           return a.price - b.price;

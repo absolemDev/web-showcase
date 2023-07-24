@@ -17,7 +17,7 @@ const DataProcessingProvider = ({ children }) => {
   const [filter, setFilter] = useState(null);
   const [searchRegExp, setSearchRegExp] = useState(null);
   const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
-  // const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const showcases = useSelector(getShowcases());
   const products = useSelector(getProducts());
   const categories = useSelector(getCategories());
@@ -47,6 +47,8 @@ const DataProcessingProvider = ({ children }) => {
       ? showcases.find((item) => item._id === idParam).name
       : showcases.find((item) => item._id === id).name;
 
+  const getPageSize = () => (isShowcasesPage() ? 4 : 6);
+
   const isProductPage = () => /^\/products\/\w+$/.test(pathname);
   const isProductsPage = () => /^\/products$/.test(pathname);
   const isShowcasePage = () => /^\/showcases\/\w+$/.test(pathname);
@@ -70,6 +72,10 @@ const DataProcessingProvider = ({ children }) => {
     setSortBy(value);
   };
 
+  const handlePageChange = (pageIndex) => {
+    setCurrentPage(pageIndex);
+  };
+
   const getEntities = () => {
     const arrTargets = isShowcasesPage()
       ? showcases
@@ -88,7 +94,6 @@ const DataProcessingProvider = ({ children }) => {
         })
       : arrTargets;
     return sorting([...filteredTargets], sortBy);
-    // const usersCrop = paginate(sortedUsers, currentPage, pageSize);
   };
 
   return (
@@ -106,7 +111,10 @@ const DataProcessingProvider = ({ children }) => {
         isShowcasePage,
         isShowcasesPage,
         getShowcaseName,
-        getListCategories
+        getListCategories,
+        currentPage,
+        handlePageChange,
+        getPageSize
       }}
     >
       {children}

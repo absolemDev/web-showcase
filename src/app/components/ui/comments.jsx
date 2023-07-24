@@ -15,7 +15,7 @@ const Comments = ({ productId, productOwner }) => {
   return (
     <div>
       {isLoggedIn ? (
-        <>{userId !== productOwner && <CommentForm />}</>
+        <>{userId !== productOwner && <CommentForm targetId={productId} />}</>
       ) : (
         <Alert variant="dark">
           Для того чтобы оставить оценку и отзыв необходимо{" "}

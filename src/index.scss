@@ -11,7 +11,8 @@
 .list-group-item.list-group-item-action.active,
 .btn-public,
 .back-history-button,
-.add-rating-button {
+.add-rating-button,
+.reply-button {
   background-color: #e65100 !important;
   border-color: #e65100 !important;
 }
@@ -104,4 +105,9 @@
 .input-search {
   outline: none !important;
   box-shadow: none !important;
+}
+
+.main {
+  min-height: 50rem;
+  max-height: 50rem;
 }

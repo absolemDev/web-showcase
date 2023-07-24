@@ -3,10 +3,16 @@ import PropTypes from "prop-types";
 import TextAreaField from "../common/form/textAreaField";
 import { validator } from "../../utils/validator";
 import RatingInput from "./ratingInput";
+import { useDispatch } from "react-redux";
+import { addReplyComment, createComment } from "../../store/comments";
+import { Button } from "react-bootstrap";
 
-const CommentForm = ({ targetId }) => {
-  const [data, setData] = useState({ rating: 0, content: "" });
+const CommentForm = ({ id, targetId, type }) => {
+  const initialData =
+    type === "comment" ? { rating: 0, content: "" } : { content: "" };
+  const [data, setData] = useState(initialData);
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
 
   const handleChange = (target) => {
     setData((prevState) => ({
@@ -37,27 +43,32 @@ const CommentForm = ({ targetId }) => {
   };
 
   const clearForm = () => {
-    setData({});
+    setData({ rating: 0, content: "" });
     setErrors({});
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isValid = validate();
-    if (!isValid) return;
-    clearForm();
+    if (!validate()) return;
+    if (type === "comment") {
+      dispatch(createComment({ ...data, targetId })).then(() => clearForm());
+    } else {
+      dispatch(addReplyComment(data, id));
+    }
   };
 
   return (
     <div>
-      <div className="fs-5 fw-bolder">Отзыв</div>
+      {type === "comment" && <div className="fs-5 fw-bolder">Отзыв</div>}
       <form onSubmit={handleSubmit}>
-        <RatingInput
-          value={data.rating}
-          onChange={handleChange}
-          name="rating"
-          error={errors.rating}
-        />
+        {type === "comment" && (
+          <RatingInput
+            value={data.rating}
+            onChange={handleChange}
+            name="rating"
+            error={errors.rating}
+          />
+        )}
         <TextAreaField
           value={data.content}
           onChange={handleChange}
@@ -65,9 +76,9 @@ const CommentForm = ({ targetId }) => {
           error={errors.content}
         />
         <div className="d-flex justify-content-end">
-          <button className="add-rating-button btn btn-primary">
-            Оставить отзыв
-          </button>
+          <Button className="add-rating-button" size="sm" type="submit">
+            {type === "comment" ? "Оставить отзыв" : "Ответить"}
+          </Button>
         </div>
       </form>
     </div>
@@ -75,7 +86,9 @@ const CommentForm = ({ targetId }) => {
 };
 
 CommentForm.propTypes = {
-  targetId: PropTypes.string
+  id: PropTypes.string,
+  targetId: PropTypes.string,
+  type: PropTypes.string
 };
 
 export default CommentForm;

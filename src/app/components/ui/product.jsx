@@ -1,15 +1,20 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { Badge, Image } from "react-bootstrap";
+import { Alert, Badge, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getProductById } from "../../store/products";
 import { getShowcaseNameById } from "../../store/showcases";
-import Comments from "./comments";
+import { getIsLoggedIn, getUserId } from "../../store/user";
+import { LinkContainer } from "react-router-bootstrap";
+import CommentForm from "./commentForm";
+import CommentsList from "./commentsList";
 
 const Product = () => {
   const { id } = useParams();
   const product = useSelector(getProductById(id));
   const showcaseName = useSelector(getShowcaseNameById(product.showcase));
+  const isLoggedIn = useSelector(getIsLoggedIn());
+  const userId = useSelector(getUserId());
 
   return (
     <div className="product">
@@ -47,7 +52,31 @@ const Product = () => {
       </div>
       <hr />
       <div>
-        <Comments productId={product._id} productOwner={product.owner} />
+        {isLoggedIn ? (
+          <div className="ps-2">
+            {userId !== product.owner && (
+              <>
+                <CommentForm targetId={product._id} type="comment" />
+                <hr />
+              </>
+            )}
+          </div>
+        ) : (
+          <Alert variant="dark">
+            Для того чтобы оставить оценку и отзыв необходимо{" "}
+            <LinkContainer to="/authorization/register">
+              <Alert.Link>Зарегистрироваться</Alert.Link>
+            </LinkContainer>{" "}
+            или{" "}
+            <LinkContainer to="/authorization/login">
+              <Alert.Link>Войти</Alert.Link>
+            </LinkContainer>{" "}
+            в систему.
+          </Alert>
+        )}
+      </div>
+      <div className="ps-2">
+        <CommentsList targetId={product._id} />
       </div>
     </div>
   );
