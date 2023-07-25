@@ -4,15 +4,7 @@ import PropTypes from "prop-types";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDataProcessing } from "../../hooks/useDataProcessing";
 
-const CardProduct = ({
-  _id,
-  name,
-  img,
-  description,
-  price,
-  rate,
-  showcase
-}) => {
+const CardProduct = ({ _id, name, img, price, rate, showcase }) => {
   const { getShowcaseName, isProductsPage } = useDataProcessing();
   return (
     <Card className="card-product col-md-6 col-lg-4">
@@ -39,11 +31,6 @@ const CardProduct = ({
         <LinkContainer to={`/products/${_id}`}>
           <Card.Title role="button">{name}</Card.Title>
         </LinkContainer>
-        <Card.Text>
-          {description.length > 70
-            ? description.slice(0, 70) + " ..."
-            : description}
-        </Card.Text>
         <div className="mt-auto">
           <Card.Text>Цена: {price}</Card.Text>
         </div>
@@ -55,7 +42,6 @@ const CardProduct = ({
 CardProduct.propTypes = {
   _id: PropTypes.string,
   name: PropTypes.string,
-  description: PropTypes.string,
   img: PropTypes.string,
   price: PropTypes.number,
   rate: PropTypes.object,

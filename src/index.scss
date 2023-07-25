@@ -106,3 +106,19 @@
   outline: none !important;
   box-shadow: none !important;
 }
+
+.page-item .page-link:hover {
+  color: #22242a;
+  border-color: #22242a;
+}
+
+.page-item .page-link {
+  color: #e65100;
+  border-color: #e65100;
+}
+
+.page-item.active .page-link {
+  color: #d3d3d3;
+  background-color: #e65100;
+  border-color: #e65100;
+}

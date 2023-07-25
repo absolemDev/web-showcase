@@ -47,7 +47,7 @@ const DataProcessingProvider = ({ children }) => {
       ? showcases.find((item) => item._id === idParam).name
       : showcases.find((item) => item._id === id).name;
 
-  const getPageSize = () => (isShowcasesPage() ? 4 : 6);
+  const getPageSize = () => (isShowcasesPage() || isShowcasePage() ? 6 : 9);
 
   const isProductPage = () => /^\/products\/\w+$/.test(pathname);
   const isProductsPage = () => /^\/products$/.test(pathname);

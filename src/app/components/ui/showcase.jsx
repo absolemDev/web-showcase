@@ -3,21 +3,19 @@ import { Badge, Button, Image } from "react-bootstrap";
 import CardList from "../common/cardList";
 import CardProduct from "./cardProduct";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { getShowcaseById } from "../../store/showcases";
-import { useDataProcessing } from "../../hooks/useDataProcessing";
 import { getUserId } from "../../store/user";
 
 const Showcase = () => {
   const { id } = useParams();
-  const { getEntities } = useDataProcessing();
   const showcase = useSelector(getShowcaseById(id));
-  const products = getEntities();
+  const [entitiesCrop] = useOutletContext();
   const navigate = useNavigate();
   const userId = useSelector(getUserId());
 
   return (
-    <div className="showcase">
+    <div className="showcase flex-grow-1">
       <div className="row">
         <div className="col-lg-6">
           <Image src={showcase.img} alt={showcase.name} rounded fluid />
@@ -48,7 +46,7 @@ const Showcase = () => {
         </div>
       </div>
       <hr />
-      <CardList items={products}>
+      <CardList items={entitiesCrop}>
         <CardProduct />
       </CardList>
     </div>
