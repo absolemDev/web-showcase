@@ -149,6 +149,11 @@ export const getUserShowcaseAccess = (id) => (state) => {
     (item) => item._id === id && item.owner === state.user.auth._id
   );
 };
+
+export const getShowcaseExist = (id) => (state) => {
+  return !!state.showcases.entities.find((item) => item._id === id);
+};
+
 export const getUserShowcases = () => (state) =>
   state.showcases.entities.filter((item) => item.owner === state.user.auth._id);
 export const getShowcasesLoadingStatus = () => (state) =>

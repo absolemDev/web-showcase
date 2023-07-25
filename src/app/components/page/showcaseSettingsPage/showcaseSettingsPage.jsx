@@ -11,14 +11,14 @@ import {
   removeShowcase,
   updateShowcaseData
 } from "../../../store/showcases";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductsListSettings from "../../ui/productsListSettings";
 import { checkEqual } from "../../../utils/checkEqual";
-import PropTypes from "prop-types";
 
-const ShowcaseSettingsPage = ({ idShowcase }) => {
-  const currentShowcaseData = useSelector(getUserShowcaseById(idShowcase));
-  const defaultData = idShowcase
+const ShowcaseSettingsPage = () => {
+  const { id } = useParams();
+  const currentShowcaseData = useSelector(getUserShowcaseById(id));
+  const defaultData = id
     ? {
         name: currentShowcaseData.name,
         description: currentShowcaseData.description,
@@ -94,7 +94,7 @@ const ShowcaseSettingsPage = ({ idShowcase }) => {
 
   const handleUpdate = () => {
     if (validate()) {
-      dispatch(updateShowcaseData(data, idShowcase, () => setIsChanged(false)));
+      dispatch(updateShowcaseData(data, id, () => setIsChanged(false)));
     }
   };
 
@@ -104,16 +104,19 @@ const ShowcaseSettingsPage = ({ idShowcase }) => {
   };
 
   const handleDelete = () => {
-    dispatch(removeShowcase(idShowcase, () => navigate("/my-showcases")));
+    dispatch(removeShowcase(id, () => navigate("/my-showcases")));
   };
 
-  function redirect(idShowcase) {
-    navigate(`/my-showcases/${idShowcase}`);
+  function redirect(id) {
+    navigate(`/my-showcases/${id}`);
   }
 
   return (
     <div>
       <div className="col-md-10 offset-md-3 shadow mt-4 mx-auto p-4">
+        <div className="fs-4 fw-bolder mb-4">
+          {id ? defaultData.name : "Новая витрина"}
+        </div>
         <TextField
           label="Название"
           name="name"
@@ -143,7 +146,7 @@ const ShowcaseSettingsPage = ({ idShowcase }) => {
           onChange={handleChange}
           error={errors.address}
         />
-        {idShowcase ? (
+        {id ? (
           <div className="d-flex">
             {isChanged && (
               <>
@@ -205,13 +208,9 @@ const ShowcaseSettingsPage = ({ idShowcase }) => {
           </Button>
         )}
       </div>
-      {idShowcase && <ProductsListSettings idShowcase={idShowcase} />}
+      {id && <ProductsListSettings showcaseId={id} />}
     </div>
   );
-};
-
-ShowcaseSettingsPage.propTypes = {
-  idShowcase: PropTypes.string
 };
 
 export default ShowcaseSettingsPage;

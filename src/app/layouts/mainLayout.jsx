@@ -47,12 +47,14 @@ const MainLayout = () => {
             <SortingPanel />
           </div>
           <Outlet context={[entitiesCrop]} />
-          <Pagination
-            currentPage={currentPage}
-            itemsCount={entitiesCount}
-            onPageChange={handlePageChange}
-            pageSize={getPageSize()}
-          />
+          {!isProductPage() && (
+            <Pagination
+              currentPage={currentPage}
+              itemsCount={entitiesCount}
+              onPageChange={handlePageChange}
+              pageSize={getPageSize()}
+            />
+          )}
         </div>
       </div>
     </>

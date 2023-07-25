@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TextField from "../common/form/textField";
 import TextAreaField from "../common/form/textAreaField";
 import { validator } from "../../utils/validator";
-import { Button } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import SelectFieldCategory from "./selectFieldCategory";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,7 @@ import {
 } from "../../store/products";
 import { checkEqual } from "../../utils/checkEqual";
 
-const ProductForm = ({ product, idShowcase, onCloseForm, index }) => {
+const ProductForm = ({ product, idShowcase, index, onClose }) => {
   const defaultData = product
     ? {
         name: product.name,
@@ -33,6 +33,12 @@ const ProductForm = ({ product, idShowcase, onCloseForm, index }) => {
   const [errors, setErrors] = useState({});
   const [isChanged, setIsChanged] = useState(false);
   const isLoading = useSelector(getProductsLoadingStatus());
+  const refFormBlock = useRef(null);
+
+  useEffect(() => {
+    refFormBlock.current.scrollIntoView({ block: "start", behavior: "smooth" });
+  }, []);
+
   const dispatch = useDispatch();
 
   const validatorConfig = {
@@ -46,14 +52,9 @@ const ProductForm = ({ product, idShowcase, onCloseForm, index }) => {
         message: "Поле обязателен для заполнения"
       }
     },
-    img: {
+    classifire: {
       isRequired: {
-        message: "Поле обязателен для заполнения"
-      }
-    },
-    price: {
-      isRequired: {
-        message: "Поле обязателен для заполнения"
+        message: "Выберите категорию из списка классификатора"
       }
     }
   };
@@ -81,43 +82,36 @@ const ProductForm = ({ product, idShowcase, onCloseForm, index }) => {
   };
 
   const handleSubmit = () => {
-    if (validate()) {
+    if (validate() && !isLoading) {
       if (product) {
-        dispatch(updateProductData(data, idShowcase, product._id)).then(() =>
-          onCloseForm()
-        );
+        dispatch(updateProductData(data, idShowcase, product._id));
       } else {
-        dispatch(createProduct(data, idShowcase)).then(() => onCloseForm());
+        dispatch(createProduct(data, idShowcase));
       }
     }
   };
 
-  const handleCancel = () => {
-    onCloseForm();
-  };
-
   return (
-    <div className="border-start border-3 my-1 ps-3 mt-4">
+    <Row
+      className="form-product border-start border-bottom border-3 ps-3 py-2"
+      ref={refFormBlock}
+    >
       <div className="d-flex mb-3">
-        <div className="fs-4 fw-bolder me-auto">
+        <div className="fs-5 fw-bolder me-auto">
           {index ? `#${index}. ${product.name}` : "Новый продукт"}
         </div>
-        <div className="d-flex">
+        <div>
           {(!product || (product && isChanged)) && (
             <Button
               variant="success"
               className="me-2"
               onClick={handleSubmit}
-              disabled={isLoading}
+              size="sm"
             >
               <i className="bi bi-check-lg"></i>
             </Button>
           )}
-          <Button
-            variant="secondary"
-            onClick={handleCancel}
-            disabled={isLoading}
-          >
+          <Button variant="secondary" size="sm" onClick={onClose}>
             <i className="bi bi-x-lg"></i>
           </Button>
         </div>
@@ -151,6 +145,7 @@ const ProductForm = ({ product, idShowcase, onCloseForm, index }) => {
         onChange={handleChange}
         error={errors.price}
         type="number"
+        min="0"
       />
       <SelectFieldCategory
         label="Категория"
@@ -159,15 +154,15 @@ const ProductForm = ({ product, idShowcase, onCloseForm, index }) => {
         onChange={handleChange}
         error={errors.classifire}
       />
-    </div>
+    </Row>
   );
 };
 
 ProductForm.propTypes = {
   product: PropTypes.object,
   idShowcase: PropTypes.string,
-  onCloseForm: PropTypes.func,
-  index: PropTypes.number
+  index: PropTypes.number,
+  onClose: PropTypes.func
 };
 
 export default ProductForm;

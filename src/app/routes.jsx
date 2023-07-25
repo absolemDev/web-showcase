@@ -8,8 +8,8 @@ import LoginPage from "./components/page/loginPage";
 import StatisticsAndAnalyticsPage from "./components/page/statisticsAndAnalyticsPage";
 import UserShowcasesLayout from "./layouts/userShowcasesLayout";
 import MyShowcasesPage from "./components/page/myShowcasesPage/myShowcasesPage";
-import ProtectShowcaseSettings from "./components/page/showcaseSettingsPage/protectShowcaseSettings";
 import ShowcaseSettingsPage from "./components/page/showcaseSettingsPage/showcaseSettingsPage";
+import ProtectPage from "./components/page/protectPage";
 
 const routes = (isLoggedIn) => [
   {
@@ -23,14 +23,20 @@ const routes = (isLoggedIn) => [
         path: "showcases",
         children: [
           { path: "", element: <MainPage /> },
-          { path: ":id", element: <Showcase /> }
+          {
+            path: ":id",
+            element: <ProtectPage component={Showcase} path="/showcases" />
+          }
         ]
       },
       {
         path: "products",
         children: [
           { path: "", element: <MainPage /> },
-          { path: ":id", element: <Product /> }
+          {
+            path: ":id",
+            element: <ProtectPage component={Product} path="/products" />
+          }
         ]
       }
     ]
@@ -53,7 +59,9 @@ const routes = (isLoggedIn) => [
       },
       {
         path: ":id",
-        element: <ProtectShowcaseSettings />
+        element: (
+          <ProtectPage component={ShowcaseSettingsPage} path="/my-showcases" />
+        )
       }
     ]
   },

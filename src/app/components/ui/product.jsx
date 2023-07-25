@@ -36,9 +36,9 @@ const Product = () => {
         </div>
         <div className="col-lg-7 p-0">
           <div className="fs-5 fw-bold">
-            {product.name}{" "}
+            {product.name}
             {product.rate.amount > 0 && (
-              <Badge className="rate">
+              <Badge className="rate ms-2">
                 <i className="bi bi-star-fill"></i>{" "}
                 {Math.round(product.rate.count / product.rate.amount)}
               </Badge>

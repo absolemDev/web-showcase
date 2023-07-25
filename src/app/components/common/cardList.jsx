@@ -2,7 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Alert } from "react-bootstrap";
 
-const CardList = ({ items, defaultCard, children, textForEmptyItems }) => {
+const CardList = ({
+  items,
+  defaultCard: DefaultCard,
+  children,
+  textForEmptyItems
+}) => {
   return (
     <div className="d-flex flex-column flex-md-row flex-wrap justify-content-center">
       {items.length
@@ -12,12 +17,12 @@ const CardList = ({ items, defaultCard, children, textForEmptyItems }) => {
               key: item._id
             });
           })
-        : !defaultCard && (
+        : !DefaultCard && (
             <Alert variant="dark" className="flex-fill">
               {textForEmptyItems}
             </Alert>
           )}
-      {defaultCard && defaultCard()}
+      {DefaultCard && <DefaultCard />}
     </div>
   );
 };

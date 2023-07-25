@@ -191,5 +191,8 @@ export const getShowcaseByProduct = (productId) => (state) => {
   ).showcase;
   return state.showcases.entities.find((item) => item._id === showcaseId);
 };
+export const getProductExist = (id) => (state) => {
+  return !!state.products.entities.find((item) => item._id === id);
+};
 
 export default productsdReducer;

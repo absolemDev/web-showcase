@@ -22,9 +22,9 @@ const Showcase = () => {
         </div>
         <div className="col-lg-6">
           <div className="fs-5 fw-bold d-flex align-items-center">
-            <div>{showcase.name} </div>
+            <div>{showcase.name}</div>
             {showcase.rate.amount > 0 && (
-              <Badge className="rate">
+              <Badge className="rate ms-2">
                 <i className="bi bi-star-fill"></i>{" "}
                 {Math.round(showcase.rate.count / showcase.rate.amount)}
               </Badge>
@@ -46,7 +46,7 @@ const Showcase = () => {
         </div>
       </div>
       <hr />
-      <CardList items={entitiesCrop}>
+      <CardList items={entitiesCrop} textForEmptyItems="Список продуктов пуст">
         <CardProduct />
       </CardList>
     </div>

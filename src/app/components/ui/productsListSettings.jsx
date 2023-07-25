@@ -6,30 +6,18 @@ import { getShowcaseProducts } from "../../store/products";
 import PropTypes from "prop-types";
 import ProductForm from "./productForm";
 
-const ProductsListSettings = ({ idShowcase }) => {
-  const products = useSelector(getShowcaseProducts(idShowcase));
-  const [formIsOpen, setStatusForm] = useState(false);
-  const [addProductStatus, setAddProductStatus] = useState(false);
+const ProductsListSettings = ({ showcaseId }) => {
+  const products = useSelector(getShowcaseProducts(showcaseId));
+  const [editProduct, setEditProduct] = useState(null);
 
-  const handleOpenForm = () => {
-    setStatusForm(true);
-  };
-  const handleCloseForm = () => {
-    setStatusForm(false);
-  };
-  const handleOpenAddForm = () => {
-    setAddProductStatus(true);
-    setStatusForm(true);
-  };
-  const handleCloseAddForm = () => {
-    setAddProductStatus(false);
-    setStatusForm(false);
+  const handleEdit = (id) => {
+    setEditProduct(id);
   };
 
   return (
     <div className="col-md-10 offset-md-3 shadow mt-4 mx-auto p-4">
-      <div className="fs-5 fw-weight-bolder">Список продкутов:</div>
-      <Row>
+      <div className="fs-5 fw-bold mb-2">Список продкутов:</div>
+      <Row className="fw-bold border-bottom border-3 p-2">
         <Col xs={1}>#</Col>
         <Col xs={3}>Название</Col>
         <Col xs={5}>Категория</Col>
@@ -40,25 +28,32 @@ const ProductsListSettings = ({ idShowcase }) => {
         <ProductSettings
           key={item._id}
           product={item}
-          idShowcase={idShowcase}
+          showcaseId={showcaseId}
           index={index + 1}
-          formIsOpen={formIsOpen}
-          onCloseForm={handleCloseForm}
-          onOpenForm={handleOpenForm}
+          onEdit={handleEdit}
+          isEdit={item._id === editProduct}
         />
       ))}
-      {addProductStatus && (
-        <ProductForm idShowcase={idShowcase} onCloseForm={handleCloseAddForm} />
+      {editProduct === "new" && (
+        <ProductForm
+          showcaseId={showcaseId}
+          onClose={() => setEditProduct(null)}
+        />
       )}
-      <Button onClick={handleOpenAddForm} disabled={formIsOpen}>
-        Добавить продукт
-      </Button>
+      {editProduct !== "new" && (
+        <Button
+          onClick={() => setEditProduct("new")}
+          className="button-add-product my-2 w-100 "
+        >
+          <i className="bi bi-plus-square me-2"></i>Добавить продукт
+        </Button>
+      )}
     </div>
   );
 };
 
 ProductsListSettings.propTypes = {
-  idShowcase: PropTypes.string
+  showcaseId: PropTypes.string
 };
 
 export default ProductsListSettings;

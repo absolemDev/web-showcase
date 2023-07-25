@@ -33,7 +33,8 @@ const DataProcessingProvider = ({ children }) => {
 
   const getListCategories = () => {
     if (isShowcasePage()) {
-      const classifire = showcases.find((item) => item._id === id).classifire;
+      const classifire =
+        showcases.find((item) => item._id === id)?.classifire || [];
       return classifire.map((item) =>
         categories.find((i) => i.classifire === item)
       );
@@ -42,10 +43,10 @@ const DataProcessingProvider = ({ children }) => {
     }
   };
 
-  const getShowcaseName = (idParam) =>
-    idParam
-      ? showcases.find((item) => item._id === idParam).name
-      : showcases.find((item) => item._id === id).name;
+  const getShowcaseName = (idShowcase) =>
+    idShowcase
+      ? showcases.find((item) => item._id === idShowcase)?.name
+      : showcases.find((item) => item._id === id)?.name;
 
   const getPageSize = () => (isShowcasesPage() || isShowcasePage() ? 6 : 9);
 

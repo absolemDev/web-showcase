@@ -18,9 +18,6 @@ const SelectFieldCategory = ({
   error,
   placeholder
 }) => {
-  // const handleChange = ({ target }) => {
-  //   onChange({ name: target.name, value: target.value });
-  // };
   const [searchList, setSearchList] = useState([]);
   const classifire = useSelector(getClassifireProducts());
   const catigory = useSelector(getCategoryByClass(value));
@@ -35,11 +32,6 @@ const SelectFieldCategory = ({
     }
   };
 
-  // const handleBlur = (event) => {
-  //   console.log(event);
-  //   dispatch({ type: "classifireProducts/classifireProductsCleared" });
-  // };
-
   useEffect(() => {
     if (value) {
       refInput.current.value = catigory.name;
@@ -51,15 +43,15 @@ const SelectFieldCategory = ({
   }, [classifire]);
 
   const handleChange = ({ target }) => {
-    refInput.current.value = target.dataset.name;
-    onChange({ name, value: target.dataset.id });
+    refInput.current.value = target.dataset.classifirename;
+    onChange({ name, value: target.dataset.classifireid });
     dispatch({ type: "classifireProducts/classifireProductsCleared" });
   };
 
-  const handelCleare = ({ target }) => {
+  const handelCleare = () => {
     refInput.current.value = "";
     dispatch({ type: "classifireProducts/classifireProductsCleared" });
-    onChange({ name: target.name, value: "" });
+    onChange({ name, value: "" });
   };
 
   const getInputClasses = () => {
@@ -78,6 +70,7 @@ const SelectFieldCategory = ({
           className={getInputClasses()}
           placeholder={placeholder || ""}
           ref={refInput}
+          disabled={!!value}
         />
         <button
           className="btn btn-outline-secondary"
@@ -104,8 +97,8 @@ const SelectFieldCategory = ({
           {searchList.map((item) => (
             <div
               key={item._id}
-              data-id={item._id}
-              data-name={item.name}
+              data-classifireid={item._id}
+              data-classifirename={item.name}
               className="p-2 w-100 classifire-item"
               role="button"
             >

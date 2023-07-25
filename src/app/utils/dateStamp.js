@@ -23,10 +23,10 @@ export function dateStamp(date) {
     return `${date.getHours()}:${date.getMinutes()}`;
   }
   if (ms <= 60000 * 60 * 24 * 365) {
-    return `${date.getDay()} ${monthString[date.getMonth()]}`;
+    return `${date.getDate()} ${monthString[date.getMonth()]}`;
   }
   if (ms > 60000 * 60 * 24 * 365) {
-    return `${date.getDay()} ${
+    return `${date.getDate()} ${
       monthString[date.getMonth()]
     } ${date.getFullYear()}`;
   }

@@ -118,7 +118,33 @@
 }
 
 .page-item.active .page-link {
-  color: #d3d3d3;
+  color: #ffffff;
   background-color: #e65100;
   border-color: #e65100;
+}
+
+.card-showcase-settings {
+  height: 7rem !important;
+  transition: all 0.2s ease-out;
+}
+
+.card-add-showcase {
+  border: 3px solid #e65100 !important;
+  transition: all 0.2s ease-out;
+}
+
+.card-add-showcase .card-body,
+.card-add-showcase .card-title {
+  color: #e65100;
+}
+
+.card-add-showcase:hover,
+.card-showcase-settings:hover {
+  transform: scale(1.05);
+}
+
+.button-add-product {
+  color: #e65100 !important;
+  background-color: #ffffff !important;
+  border-color: #e65100 !important;
 }
