@@ -32,21 +32,11 @@ const SelectFieldCategory = ({
     }
   };
 
-  useEffect(() => {
-    if (value) {
-      refInput.current.value = catigory.name;
-    }
-  }, []);
-
-  useEffect(() => {
-    setSearchList(classifire);
-  }, [classifire]);
-
-  const handleChange = ({ target }) => {
-    refInput.current.value = target.dataset.classifirename;
-    onChange({ name, value: target.dataset.classifireid });
-    dispatch({ type: "classifireProducts/classifireProductsCleared" });
-  };
+  // const handleChange = ({ target }) => {
+  //   refInput.current.value = target.dataset.classifirename;
+  //   onChange({ name, value: target.dataset.classifireid });
+  //   dispatch({ type: "classifireProducts/classifireProductsCleared" });
+  // };
 
   const handelCleare = () => {
     refInput.current.value = "";
@@ -57,6 +47,28 @@ const SelectFieldCategory = ({
   const getInputClasses = () => {
     return "form-control" + (error ? " is-invalid" : "");
   };
+
+  const clickListener = ({ target }) => {
+    if (target.dataset.classifireid) {
+      refInput.current.value = target.dataset.classifirename;
+      onChange({ name, value: target.dataset.classifireid });
+    }
+    dispatch({ type: "classifireProducts/classifireProductsCleared" });
+  };
+
+  useEffect(() => {
+    if (value) {
+      refInput.current.value = catigory.name;
+    }
+    document.addEventListener("click", clickListener);
+    return () => {
+      document.removeEventListener("click", clickListener);
+    };
+  }, []);
+
+  useEffect(() => {
+    setSearchList(classifire);
+  }, [classifire]);
 
   return (
     <div className="mb-4">
@@ -80,10 +92,7 @@ const SelectFieldCategory = ({
           <i className="bi bi-x-lg"></i>
         </button>
         {error && <div className="invalid-feedback">{error}</div>}
-        <div
-          className="position-absolute top-100 container-fluid p-0 bg-body"
-          onClick={handleChange}
-        >
+        <div className="position-absolute top-100 container-fluid p-0 bg-body">
           {isLoading && (
             <Spinner
               animation="border"
