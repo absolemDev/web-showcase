@@ -1,8 +1,8 @@
 import React from "react";
-import CardList from "../../common/cardList";
-import CardShowcase from "../../ui/cardShowcase";
-import CardProduct from "../../ui/cardProduct";
-import { useDataProcessing } from "../../../hooks/useDataProcessing";
+import CardList from "../common/cardList";
+import CardShowcase from "../ui/cardShowcase";
+import CardProduct from "../ui/cardProduct";
+import { useDataProcessing } from "../../hooks/useDataProcessing";
 import { useOutletContext } from "react-router-dom";
 
 const MainPage = () => {

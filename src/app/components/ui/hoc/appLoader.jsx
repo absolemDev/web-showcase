@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getIsLoggedIn,
-  getUserDataLoadedStatus,
+  getListLoadedStatus,
   loadUserData,
   loadUsersList
 } from "../../../store/user";
@@ -31,7 +31,7 @@ const AppLoader = ({ children }) => {
   const showcasesIsLoaded = useSelector(getShowcasesDataLoadedStatus());
   const productsIsLoaded = useSelector(getProductsDataLoadedStatus());
   const commentsIsLoaded = useSelector(getCommentsDataLoadedStatus());
-  const usersIsLoaded = useSelector(getUserDataLoadedStatus());
+  const usersIsLoaded = useSelector(getListLoadedStatus());
 
   const dispatch = useDispatch();
 

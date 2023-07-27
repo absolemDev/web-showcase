@@ -1,15 +1,14 @@
 import { Navigate } from "react-router-dom";
 import MainLayout from "./layouts/mainLayout";
-import MainPage from "./components/page/mainPage/mainPage";
-import Showcase from "./components/ui/showcase";
-import Product from "./components/ui/product";
+import MainPage from "./components/page/mainPage";
 import ServicesLayout from "./layouts/servicesLayout";
-import LoginPage from "./components/page/loginPage";
-import StatisticsAndAnalyticsPage from "./components/page/statisticsAndAnalyticsPage";
 import UserShowcasesLayout from "./layouts/userShowcasesLayout";
-import MyShowcasesPage from "./components/page/myShowcasesPage/myShowcasesPage";
-import ShowcaseSettingsPage from "./components/page/showcaseSettingsPage/showcaseSettingsPage";
+import MyShowcasesPage from "./components/page/myShowcasesPage";
+import ShowcaseSettingsPage from "./components/page/showcaseSettingsPage";
 import ProtectPage from "./components/page/protectPage";
+import ShowcasePage from "./components/page/showcasePage";
+import ProductPage from "./components/page/productPage";
+import LoginPage from "./components/page/logInPage";
 
 const routes = (isLoggedIn) => [
   {
@@ -25,7 +24,7 @@ const routes = (isLoggedIn) => [
           { path: "", element: <MainPage /> },
           {
             path: ":id",
-            element: <ProtectPage component={Showcase} path="/showcases" />
+            element: <ProtectPage component={ShowcasePage} path="/showcases" />
           }
         ]
       },
@@ -35,7 +34,7 @@ const routes = (isLoggedIn) => [
           { path: "", element: <MainPage /> },
           {
             path: ":id",
-            element: <ProtectPage component={Product} path="/products" />
+            element: <ProtectPage component={ProductPage} path="/products" />
           }
         ]
       }
@@ -71,10 +70,6 @@ const routes = (isLoggedIn) => [
       {
         path: "authorization/:type?",
         element: isLoggedIn ? <Navigate to="/showcases" /> : <LoginPage />
-      },
-      {
-        path: "statistics-and-analytics",
-        element: <StatisticsAndAnalyticsPage />
       }
     ]
   },

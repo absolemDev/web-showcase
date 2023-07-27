@@ -12,7 +12,8 @@ const initialState = localStorageService.getAccessToken()
       entities: [],
       isLoggedIn: true,
       isLoading: true,
-      dataLoaded: false,
+      listLoaded: false,
+      userDataLoaded: false,
       error: null
     }
   : {
@@ -20,7 +21,8 @@ const initialState = localStorageService.getAccessToken()
       entities: [],
       isLoggedIn: false,
       isLoading: false,
-      dataLoaded: true,
+      listLoaded: true,
+      userDataLoaded: false,
       error: null
     };
 
@@ -32,10 +34,11 @@ const userSlice = createSlice({
       state.auth = action.payload;
       state.isLoggedIn = true;
       state.isLoading = false;
+      state.userDataLoaded = true;
     },
     usersListRequestSuccess: (state, action) => {
       state.entities = action.payload;
-      state.dataLoaded = true;
+      state.listLoaded = true;
       state.isLoading = false;
     },
     userRequestFailed: (state, action) => {
@@ -141,11 +144,13 @@ export const loadUsersList = () => async (dispatch) => {
 };
 
 export const getUserLoadingStatus = () => (state) => state.user.isLoading;
-export const getUserDataLoadedStatus = () => (state) => state.user.dataLoaded;
+export const getListLoadedStatus = () => (state) => state.user.listLoaded;
 export const getIsLoggedIn = () => (state) => state.user.isLoggedIn;
 export const getServerError = () => (state) => state.user.error;
 export const getUserId = () => (state) => state.user.auth?._id;
 export const getUserById = (id) => (state) =>
   state.user.entities.find((item) => item._id === id);
+export const getCurrentUser = () => (state) => state.user.auth;
+export const getUserLoadedStatus = () => (state) => state.user.userDataLoaded;
 
 export default userReducer;

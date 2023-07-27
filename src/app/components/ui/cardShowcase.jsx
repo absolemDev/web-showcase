@@ -10,7 +10,7 @@ const CardShowcase = ({ _id, name, description, address, img, rate }) => {
         <Card.Img src={img} alt={name} />
         <div className="overlay position-absolute bg-dark opacity-50 w-100 h-100"></div>
         <Card.ImgOverlay className="d-flex align-items-start flex-column">
-          <Card.Title className="d-flex w-100">
+          <Card.Title className="d-flex w-100 mb-4">
             <div>{name}</div>
             {rate.amount > 0 && (
               <Badge className="rate ms-auto">

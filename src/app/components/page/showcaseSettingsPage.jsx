@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import TextField from "../../common/form/textField";
-import TextAreaField from "../../common/form/textAreaField";
+import TextField from "../common/form/textField";
+import TextAreaField from "../common/form/textAreaField";
 import { Button, Spinner } from "react-bootstrap";
-import { validator } from "../../../utils/validator";
+import { validator } from "../../utils/validator";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createShowcase,
@@ -10,10 +10,10 @@ import {
   getUserShowcaseById,
   removeShowcase,
   updateShowcaseData
-} from "../../../store/showcases";
+} from "../../store/showcases";
 import { useNavigate, useParams } from "react-router-dom";
-import ProductsListSettings from "../../ui/productsListSettings";
-import { checkEqual } from "../../../utils/checkEqual";
+import ProductsListSettings from "../ui/productsListSettings";
+import { checkEqual } from "../../utils/checkEqual";
 
 const ShowcaseSettingsPage = () => {
   const { id } = useParams();
