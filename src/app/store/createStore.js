@@ -7,7 +7,7 @@ import categoriesReducer from "./categories";
 import commentsReducer from "./comments";
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  users: userReducer,
   showcases: showcasesReducer,
   products: productsdReducer,
   classifireProducts: classifireProductsReducer,

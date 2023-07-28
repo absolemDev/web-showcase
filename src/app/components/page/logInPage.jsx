@@ -12,7 +12,7 @@ const LoginPage = () => {
   const authError = useSelector(getServerError());
   const handleSelect = () => {
     if (authError) {
-      dispatch({ type: "user/authErrorFixed" });
+      dispatch({ type: "users/authErrorFixed" });
     }
   };
   return (

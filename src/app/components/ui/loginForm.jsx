@@ -88,7 +88,6 @@ const LoginForm = () => {
               role="status"
               aria-hidden="true"
             />
-            <span className="visually-hidden">Loading...</span>
           </>
         ) : (
           "Вход"

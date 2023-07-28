@@ -3,7 +3,7 @@ import { Image, Placeholder } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCurrentUser,
-  getUserLoadedStatus,
+  getUsersLoadingStatus,
   logOut
 } from "../../../store/user";
 import { LinkContainer } from "react-router-bootstrap";
@@ -11,7 +11,7 @@ import { LinkContainer } from "react-router-bootstrap";
 const NavProfile = () => {
   const [isOpen, setOpen] = useState(false);
   const user = useSelector(getCurrentUser());
-  const isLoaded = useSelector(getUserLoadedStatus());
+  const isLoading = useSelector(getUsersLoadingStatus());
   const dispatch = useDispatch();
 
   const handleToggleMenu = () => {
@@ -24,7 +24,7 @@ const NavProfile = () => {
 
   return (
     <div className="position-relative" onClick={handleToggleMenu}>
-      {isLoaded ? (
+      {isLoading ? (
         <div className="d-flex align-items-center mx-3" role="button">
           <Image
             src={user.img}
@@ -39,7 +39,7 @@ const NavProfile = () => {
           ></i>
         </div>
       ) : (
-        <Placeholder as={Image} width="40" height="40" roundedCircle />
+        <Placeholder.Button variant="dark" xs={6} />
       )}
       <div
         className={`${

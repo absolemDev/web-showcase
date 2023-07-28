@@ -18,6 +18,11 @@ export function validator(data, config) {
         statusValidate = !emailRegExp.test(data);
         break;
       }
+      case "isLink": {
+        const linkRegExp = /^(ftp|http|https):\/\/[^ "]+$/g;
+        statusValidate = !linkRegExp.test(data);
+        break;
+      }
       case "isCapitalSymbol": {
         const capitalRegExp = /[A-Z]+/g;
         statusValidate = !capitalRegExp.test(data);

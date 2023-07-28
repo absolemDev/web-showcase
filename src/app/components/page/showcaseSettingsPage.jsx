@@ -17,13 +17,15 @@ import { checkEqual } from "../../utils/checkEqual";
 
 const ShowcaseSettingsPage = () => {
   const { id } = useParams();
-  const currentShowcaseData = useSelector(getUserShowcaseById(id));
+  const { name, description, img, address } = useSelector(
+    getUserShowcaseById(id)
+  );
   const defaultData = id
     ? {
-        name: currentShowcaseData.name,
-        description: currentShowcaseData.description,
-        img: currentShowcaseData.img,
-        address: currentShowcaseData.address
+        name,
+        description,
+        img,
+        address
       }
     : {
         name: "",
@@ -107,9 +109,9 @@ const ShowcaseSettingsPage = () => {
     dispatch(removeShowcase(id, () => navigate("/my-showcases")));
   };
 
-  function redirect(id) {
+  const redirect = (id) => {
     navigate(`/my-showcases/${id}`);
-  }
+  };
 
   return (
     <div>
