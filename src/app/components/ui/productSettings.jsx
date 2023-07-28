@@ -6,14 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoryNameByClass } from "../../store/categories";
 import ProductForm from "./productForm";
 
-const ProductSettings = ({ product, idShowcase, isEdit, onEdit, index }) => {
+const ProductSettings = ({ product, showcaseId, isEdit, onEdit, index }) => {
   const isLoading = useSelector(getProductsLoadingStatus());
   const categoryName = useSelector(getCategoryNameByClass(product.classifire));
 
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(removeProduct(idShowcase, product._id));
+    dispatch(removeProduct(showcaseId, product._id));
   };
 
   const handleOpenForm = () => {
@@ -29,7 +29,7 @@ const ProductSettings = ({ product, idShowcase, isEdit, onEdit, index }) => {
       {isEdit ? (
         <ProductForm
           product={product}
-          idShowcase={idShowcase}
+          idShowcase={showcaseId}
           index={index}
           onClose={handleCloseForm}
         />
@@ -61,7 +61,7 @@ const ProductSettings = ({ product, idShowcase, isEdit, onEdit, index }) => {
 
 ProductSettings.propTypes = {
   product: PropTypes.object,
-  idShowcase: PropTypes.string,
+  showcaseId: PropTypes.string,
   isEdit: PropTypes.bool,
   onEdit: PropTypes.func,
   index: PropTypes.number

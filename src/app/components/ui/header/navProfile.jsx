@@ -24,7 +24,7 @@ const NavProfile = () => {
 
   return (
     <div className="position-relative" onClick={handleToggleMenu}>
-      {isLoading ? (
+      {!isLoading ? (
         <div className="d-flex align-items-center mx-3" role="button">
           <Image
             src={user.img}

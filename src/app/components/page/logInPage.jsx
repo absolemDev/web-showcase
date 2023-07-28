@@ -16,7 +16,7 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className="col-md-6 offset-md-3 shadow mt-4">
+    <div className="col-md-6 shadow">
       <Tabs
         defaultActiveKey={type || "login"}
         id="login-page"

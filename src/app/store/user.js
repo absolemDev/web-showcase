@@ -147,7 +147,7 @@ export const loadUsersList = () => async (dispatch) => {
 };
 
 export const getUsersLoadingStatus = () => (state) => state.users.isLoading;
-export const getListLoadedStatus = () => (state) => state.users.listLoaded;
+export const getUsersListLoadedStatus = () => (state) => state.users.dataLoaded;
 export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
 export const getServerError = () => (state) => state.users.error;
 export const getUserId = () => (state) => state.users.auth?.userId;

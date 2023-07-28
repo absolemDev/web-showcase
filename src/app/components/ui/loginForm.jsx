@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import { useDispatch, useSelector } from "react-redux";
-import { getServerError, getUserLoadingStatus, logIn } from "../../store/user";
+import { getServerError, getUsersLoadingStatus, logIn } from "../../store/user";
 import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const isValid = Object.keys(errors).length === 0;
   const loginError = useSelector(getServerError());
-  const userIsLoading = useSelector(getUserLoadingStatus());
+  const userIsLoading = useSelector(getUsersLoadingStatus());
 
   const dispatch = useDispatch();
 

@@ -61,10 +61,12 @@ const ProfilePage = () => {
     e.preventDefault();
     if (!validate()) return;
     dispatch(updateUserData(data));
+    setIsChanged(false);
   };
 
   return (
-    <div className="col-md-6 offset-md-3 shadow mt-4">
+    <div className="col-md-6 shadow">
+      <div className="fs-5 fw-bolder mb-4">Настройки профиля</div>
       <form onSubmit={handleSubmit} className="px-4 pb-4">
         <TextField
           id="name"

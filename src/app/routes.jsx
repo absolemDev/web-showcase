@@ -1,7 +1,6 @@
 import { Navigate } from "react-router-dom";
 import MainLayout from "./layouts/mainLayout";
 import MainPage from "./components/page/mainPage";
-import ServicesLayout from "./layouts/servicesLayout";
 import UserShowcasesLayout from "./layouts/userShowcasesLayout";
 import MyShowcasesPage from "./components/page/myShowcasesPage";
 import ShowcaseSettingsPage from "./components/page/showcaseSettingsPage";
@@ -9,6 +8,8 @@ import ProtectPage from "./components/page/protectPage";
 import ShowcasePage from "./components/page/showcasePage";
 import ProductPage from "./components/page/productPage";
 import LoginPage from "./components/page/logInPage";
+import ProfilePage from "./components/page/profilePage";
+import ServicesLayout from "./layouts/servicesLayout";
 
 const routes = (isLoggedIn) => [
   {
@@ -70,6 +71,10 @@ const routes = (isLoggedIn) => [
       {
         path: "authorization/:type?",
         element: isLoggedIn ? <Navigate to="/showcases" /> : <LoginPage />
+      },
+      {
+        path: "profile",
+        element: !isLoggedIn ? <Navigate to="/showcases" /> : <ProfilePage />
       }
     ]
   },

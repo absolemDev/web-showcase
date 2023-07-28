@@ -3,7 +3,11 @@ import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
 import { useDispatch, useSelector } from "react-redux";
-import { getServerError, getUserLoadingStatus, signUp } from "../../store/user";
+import {
+  getServerError,
+  getUsersLoadingStatus,
+  signUp
+} from "../../store/user";
 import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +21,7 @@ const RegisterForm = () => {
   const [errors, setErrors] = useState({});
   const isValid = Object.keys(errors).length === 0;
   const authError = useSelector(getServerError());
-  const userIsLoading = useSelector(getUserLoadingStatus());
+  const userIsLoading = useSelector(getUsersLoadingStatus());
 
   const dispatch = useDispatch();
 

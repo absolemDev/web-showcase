@@ -97,7 +97,7 @@ export const createShowcase = (payload, redirect) => async (dispatch) => {
   try {
     const data = await showcaseService.create(payload);
     dispatch(createShowcaseSaccess(data));
-    redirect(data._id);
+    redirect();
   } catch (error) {
     dispatch(createShowcaseFiled(error.message));
   }
@@ -138,16 +138,16 @@ export const getShowcaseById = (id) => (state) => {
 };
 export const getUserShowcaseById = (id) => (state) => {
   return state.showcases.entities.find(
-    (item) => item._id === id && item.owner === state.user.auth._id
+    (item) => item._id === id && item.owner === state.users.auth.userId
   );
 };
 export const getShowcaseNameById = (id) => (state) => {
   return state.showcases.entities.find((item) => item._id === id).name;
 };
 export const getUserShowcaseAccess = (id) => (state) => {
-  return state.user.auth
+  return state.users.auth
     ? !!state.showcases.entities.find(
-        (item) => item._id === id && item.owner === state.user.auth._id
+        (item) => item._id === id && item.owner === state.users.auth.userId
       )
     : false;
 };
@@ -157,7 +157,9 @@ export const getShowcaseExist = (id) => (state) => {
 };
 
 export const getUserShowcases = () => (state) =>
-  state.showcases.entities.filter((item) => item.owner === state.user.auth._id);
+  state.showcases.entities.filter(
+    (item) => item.owner === state.users.auth.userId
+  );
 export const getShowcasesLoadingStatus = () => (state) =>
   state.showcases.isLoading;
 export const getShowcasesDataLoadedStatus = () => (state) =>

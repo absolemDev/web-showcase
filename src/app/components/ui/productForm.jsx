@@ -88,6 +88,7 @@ const ProductForm = ({ product, idShowcase, index, onClose }) => {
       } else {
         dispatch(createProduct(data, idShowcase));
       }
+      setIsChanged(false);
     }
   };
 
