@@ -27,7 +27,7 @@ const TargetInfo = ({ name, img, rate, description, price, address, link }) => {
             </Badge>
           )}
         </div>
-        <p className="flex-grow-1">{description}</p>
+        <p className="flex-grow-1 pe-4">{description}</p>
         {address && (
           <p className="m-0">
             <span className="fw-bold">Адрес:</span> {address}

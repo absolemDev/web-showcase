@@ -97,7 +97,7 @@ export const createShowcase = (payload, redirect) => async (dispatch) => {
   try {
     const data = await showcaseService.create(payload);
     dispatch(createShowcaseSaccess(data));
-    redirect();
+    redirect(data._id);
   } catch (error) {
     dispatch(createShowcaseFiled(error.message));
   }
@@ -151,11 +151,9 @@ export const getUserShowcaseAccess = (id) => (state) => {
       )
     : false;
 };
-
 export const getShowcaseExist = (id) => (state) => {
   return !!state.showcases.entities.find((item) => item._id === id);
 };
-
 export const getUserShowcases = () => (state) =>
   state.showcases.entities.filter(
     (item) => item.owner === state.users.auth.userId

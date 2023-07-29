@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import TextField from "../common/form/textField";
-import TextAreaField from "../common/form/textAreaField";
+import TextField from "../../common/form/textField";
+import TextAreaField from "../../common/form/textAreaField";
 import { Button, Spinner } from "react-bootstrap";
-import { validator } from "../../utils/validator";
+import { validator } from "../../../utils/validator";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createShowcase,
   getShowcasesLoadingStatus,
   removeShowcase,
   updateShowcaseData
-} from "../../store/showcases";
+} from "../../../store/showcases";
 import { useNavigate } from "react-router-dom";
-import { checkEqual } from "../../utils/checkEqual";
+import { checkEqual } from "../../../utils/checkEqual";
 import PropTypes from "prop-types";
 
 const ShowcaseForm = ({ defaultData, showcaseId }) => {
@@ -31,11 +31,6 @@ const ShowcaseForm = ({ defaultData, showcaseId }) => {
       }
     },
     description: {
-      isRequired: {
-        message: "Поле обязателен для заполнения"
-      }
-    },
-    img: {
       isRequired: {
         message: "Поле обязателен для заполнения"
       }
@@ -91,14 +86,23 @@ const ShowcaseForm = ({ defaultData, showcaseId }) => {
     dispatch(removeShowcase(showcaseId, () => navigate("/my-showcases")));
   };
 
-  const redirect = () => {
-    navigate(`/my-showcases/${showcaseId}`);
+  const redirect = (id) => {
+    navigate(`/my-showcases/${id}`);
   };
 
   return (
     <div className="col-md-10 offset-md-3 shadow mt-4 mx-auto p-4">
-      <div className="fs-4 fw-bolder mb-4">
+      <div className="fs-4 fw-bolder mb-4 position-relative">
         {showcaseId ? defaultData.name : "Новая витрина"}
+        {showcaseId && (
+          <Button
+            variant="light"
+            className="position-absolute top-0 end-0"
+            onClick={() => navigate(`/showcases/${showcaseId}`)}
+          >
+            <i className="bi bi-eye-fill"></i>
+          </Button>
+        )}
       </div>
       <TextField
         label="Название"

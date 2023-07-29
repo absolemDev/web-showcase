@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { validator } from "../../utils/validator";
-import TextField from "../common/form/textField";
+import { validator } from "../../../utils/validator";
+import TextField from "../../common/form/textField";
 import { useDispatch, useSelector } from "react-redux";
-import { getServerError, getUsersLoadingStatus, logIn } from "../../store/user";
+import {
+  getServerError,
+  getUsersLoadingStatus,
+  logIn
+} from "../../../store/user";
 import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -30,6 +34,9 @@ const LoginForm = () => {
     email: {
       isRequired: {
         message: "Электронная почта обязательна для заполнения"
+      },
+      isEmail: {
+        message: "Введите корректную электронную почту"
       }
     },
     password: {

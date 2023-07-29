@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import TextField from "../common/form/textField";
-import TextAreaField from "../common/form/textAreaField";
-import { validator } from "../../utils/validator";
+import TextField from "../../common/form/textField";
+import TextAreaField from "../../common/form/textAreaField";
+import { validator } from "../../../utils/validator";
 import { Button, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
-import SelectFieldCategory from "./selectFieldCategory";
+import SelectFieldCategory from "../selectFieldCategory";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createProduct,
   getProductsLoadingStatus,
   updateProductData
-} from "../../store/products";
-import { checkEqual } from "../../utils/checkEqual";
+} from "../../../store/products";
+import { checkEqual } from "../../../utils/checkEqual";
 
-const ProductForm = ({ product, idShowcase, index, onClose }) => {
+const ProductForm = ({ product, showcaseId, index, onClose }) => {
   const defaultData = product
     ? {
         name: product.name,
@@ -84,9 +84,11 @@ const ProductForm = ({ product, idShowcase, index, onClose }) => {
   const handleSubmit = () => {
     if (validate() && !isLoading) {
       if (product) {
-        dispatch(updateProductData(data, idShowcase, product._id));
+        dispatch(updateProductData(data, showcaseId, product._id)).then(() =>
+          onClose()
+        );
       } else {
-        dispatch(createProduct(data, idShowcase));
+        dispatch(createProduct(data, showcaseId)).then(() => onClose());
       }
       setIsChanged(false);
     }
@@ -161,7 +163,7 @@ const ProductForm = ({ product, idShowcase, index, onClose }) => {
 
 ProductForm.propTypes = {
   product: PropTypes.object,
-  idShowcase: PropTypes.string,
+  showcaseId: PropTypes.string,
   index: PropTypes.number,
   onClose: PropTypes.func
 };

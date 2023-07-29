@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import CardList from "../common/cardList";
-import CardProduct from "../ui/cardProduct";
+import CardProduct from "../ui/card/cardProduct";
 import { useSelector } from "react-redux";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { getShowcaseById } from "../../store/showcases";

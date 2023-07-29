@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { getUserShowcaseById } from "../../store/showcases";
 import { useParams } from "react-router-dom";
 import ProductsListSettings from "../ui/productsListSettings";
-import ShowcaseForm from "../ui/showcaseForm";
+import ShowcaseForm from "../ui/form/showcaseForm";
 
 const ShowcaseSettingsPage = () => {
   const { id } = useParams();

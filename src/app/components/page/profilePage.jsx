@@ -46,7 +46,7 @@ const ProfilePage = () => {
     },
     img: {
       isLink: {
-        message: "Вставте ссылку на изображение"
+        message: "Поле Аватар должно быть ссылкой на изображение"
       }
     }
   };
@@ -65,7 +65,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="col-md-6 shadow">
+    <div className="col-md-6 shadow p-4">
       <div className="fs-5 fw-bolder mb-4">Настройки профиля</div>
       <form onSubmit={handleSubmit} className="px-4 pb-4">
         <TextField

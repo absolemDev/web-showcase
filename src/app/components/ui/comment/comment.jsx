@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserId } from "../../store/user";
-import { dateStamp } from "../../utils/dateStamp";
+import { getUserId } from "../../../store/user";
+import { dateStamp } from "../../../utils/dateStamp";
 import Rating from "./rating";
-import { removeComment } from "../../store/comments";
+import { removeComment } from "../../../store/comments";
 
 const Comment = ({ id, commentator, rating, createdAt, content, type }) => {
   const currentUserId = useSelector(getUserId());

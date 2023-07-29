@@ -7,10 +7,6 @@ const showcaseService = {
     const { data } = await httpService.get(showcaseEndpoint);
     return data;
   },
-  getData: async (id) => {
-    const { data } = await httpService.get(showcaseEndpoint + id);
-    return data;
-  },
   create: async (payload) => {
     const { data } = await httpService.post(showcaseEndpoint, payload);
     return data;
@@ -21,10 +17,6 @@ const showcaseService = {
   },
   remove: async (id) => {
     const { data } = await httpService.delete(showcaseEndpoint + id);
-    return data;
-  },
-  fetchProducts: async (id) => {
-    const { data } = await httpService.get(showcaseEndpoint + id + "/product");
     return data;
   }
 };

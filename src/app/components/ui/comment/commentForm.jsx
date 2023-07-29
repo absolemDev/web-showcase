@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import TextAreaField from "../common/form/textAreaField";
-import { validator } from "../../utils/validator";
+import TextAreaField from "../../common/form/textAreaField";
+import { validator } from "../../../utils/validator";
 import RatingInput from "./ratingInput";
 import { useDispatch } from "react-redux";
-import { addReplyComment, createComment } from "../../store/comments";
+import { addReplyComment, createComment } from "../../../store/comments";
 import { Button } from "react-bootstrap";
 
 const CommentForm = ({ id, targetId, type }) => {

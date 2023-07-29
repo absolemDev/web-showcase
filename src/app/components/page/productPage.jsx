@@ -6,13 +6,13 @@ import { getProductById } from "../../store/products";
 import { getShowcaseNameById } from "../../store/showcases";
 import { getIsLoggedIn, getUserId } from "../../store/user";
 import { LinkContainer } from "react-router-bootstrap";
-import CommentForm from "../ui/commentForm";
-import CommentsList from "../ui/commentsList";
+import CommentForm from "../ui/comment/commentForm";
+import CommentsList from "../ui/comment/commentsList";
 import TargetInfo from "../ui/targetInfo";
 
 const ProductPage = () => {
   const { id } = useParams();
-  const { name, descripion, img, rate, price, owner, showcase } = useSelector(
+  const { name, description, img, rate, price, owner, showcase } = useSelector(
     getProductById(id)
   );
   const showcaseName = useSelector(getShowcaseNameById(showcase));
@@ -23,7 +23,7 @@ const ProductPage = () => {
     <div className="product">
       <TargetInfo
         name={name}
-        description={descripion}
+        description={description}
         img={img}
         price={price}
         rate={rate}

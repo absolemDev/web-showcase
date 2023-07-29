@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 // import { getCommentsByTarget } from "../../store/comments";
-import { getIsLoggedIn, getUserId } from "../../store/user";
+import { getIsLoggedIn, getUserId } from "../../../store/user";
 import { Alert } from "react-bootstrap";
 import PropTypes from "prop-types";
 import CommentForm from "./commentForm";

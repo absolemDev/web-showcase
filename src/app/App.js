@@ -5,6 +5,7 @@ import routes from "./routes";
 import AppLoader from "./components/ui/hoc/appLoader";
 import { useSelector } from "react-redux";
 import { getIsLoggedIn } from "./store/user";
+import Footer from "./components/ui/footer";
 
 function App() {
   const isLoggedIn = useSelector(getIsLoggedIn());
@@ -16,7 +17,7 @@ function App() {
       <main className="flex-grow-1 d-flex flex-column">
         <AppLoader>{elements}</AppLoader>
       </main>
-      <footer>!</footer>
+      <Footer />
     </div>
   );
 }

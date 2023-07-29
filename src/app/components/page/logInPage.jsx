@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import RegisterForm from "../ui/registerForm";
-import LoginForm from "../ui/loginForm";
 import { Tab, Tabs } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getServerError } from "../../store/user";
+import LoginForm from "../ui/form/loginForm";
+import RegisterForm from "../ui/form/registerForm";
 
 const LoginPage = () => {
   const { type } = useParams();

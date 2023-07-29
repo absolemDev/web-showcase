@@ -1,9 +1,9 @@
 import React from "react";
 import CardList from "../common/cardList";
-import CardAddShowcase from "../ui/cardAddShowcase";
+import CardAddShowcase from "../ui/card/cardAddShowcase";
 import { useSelector } from "react-redux";
 import { getUserShowcases } from "../../store/showcases";
-import CardShowcaseSettings from "../ui/cardShowcaseSettings";
+import CardShowcaseSettings from "../ui/card/cardShowcaseSettings";
 
 const MyShowcasesPage = () => {
   const showcases = useSelector(getUserShowcases());

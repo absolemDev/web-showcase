@@ -31,7 +31,13 @@ const userSlice = createSlice({
     authRequested: (state) => {
       state.isLoading = true;
     },
-    authRequestSuccess: (state, action) => {
+    signUpSuccess: (state, action) => {
+      state.auth = { userId: action.payload._id };
+      state.entities.push(action.payload);
+      state.isLoggedIn = true;
+      state.isLoading = false;
+    },
+    logInSuccess: (state, action) => {
       state.auth = action.payload;
       state.isLoggedIn = true;
       state.isLoading = false;
@@ -80,7 +86,8 @@ const { reducer: userReducer, actions } = userSlice;
 
 const {
   authRequested,
-  authRequestSuccess,
+  signUpSuccess,
+  logInSuccess,
   authRequestFailed,
   usersListRequesed,
   usersListRequestSuccess,
@@ -96,7 +103,7 @@ export const logIn = (payload, redirect) => async (dispatch) => {
   try {
     const data = await authService.login(payload);
     localStorageService.setTokens(data);
-    dispatch(authRequestSuccess({ userId: data.userId }));
+    dispatch(logInSuccess({ userId: data.userId }));
     redirect();
   } catch (error) {
     const errorMessage = error.response
@@ -109,9 +116,9 @@ export const logIn = (payload, redirect) => async (dispatch) => {
 export const signUp = (payload, redirect) => async (dispatch) => {
   dispatch(authRequested());
   try {
-    const data = await authService.register(payload);
-    localStorageService.setTokens(data.authData);
-    dispatch(authRequestSuccess(data.userData));
+    const { authData, userData } = await authService.register(payload);
+    localStorageService.setTokens(authData);
+    dispatch(signUpSuccess(userData));
     redirect();
   } catch (error) {
     const errorMessage = error.response

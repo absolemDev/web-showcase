@@ -4,7 +4,7 @@ import { Button, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getShowcaseProducts } from "../../store/products";
 import PropTypes from "prop-types";
-import ProductForm from "./productForm";
+import ProductForm from "./form/productForm";
 
 const ProductsListSettings = ({ showcaseId }) => {
   const products = useSelector(getShowcaseProducts(showcaseId));

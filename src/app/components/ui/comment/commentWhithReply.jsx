@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import Comment from "./comment";
 import CommentForm from "./commentForm";
 import { useSelector } from "react-redux";
-import { getUserById, getUserId } from "../../store/user";
-import { getShowcaseByProduct } from "../../store/products";
+import { getUserById, getUserId } from "../../../store/user";
+import { getShowcaseByProduct } from "../../../store/products";
 
 const CommentWithReply = ({ comment }) => {
   const {

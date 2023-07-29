@@ -31,6 +31,10 @@ const DataProcessingProvider = ({ children }) => {
     if (searchRegExp) setSearchRegExp(null);
   }, [pathname]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filter, searchRegExp, pathname]);
+
   const getListCategories = () => {
     if (isShowcasePage()) {
       const classifire =

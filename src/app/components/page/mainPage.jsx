@@ -1,7 +1,7 @@
 import React from "react";
 import CardList from "../common/cardList";
-import CardShowcase from "../ui/cardShowcase";
-import CardProduct from "../ui/cardProduct";
+import CardShowcase from "../ui/card/cardShowcase";
+import CardProduct from "../ui/card/cardProduct";
 import { useDataProcessing } from "../../hooks/useDataProcessing";
 import { useOutletContext } from "react-router-dom";
 

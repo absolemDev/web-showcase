@@ -2,7 +2,7 @@ import React from "react";
 import { Badge, Card } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { LinkContainer } from "react-router-bootstrap";
-import { useDataProcessing } from "../../hooks/useDataProcessing";
+import { useDataProcessing } from "../../../hooks/useDataProcessing";
 
 const CardProduct = ({ _id, name, img, price, rate, showcase }) => {
   const { getShowcaseName, isProductsPage } = useDataProcessing();

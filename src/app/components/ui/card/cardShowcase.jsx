@@ -6,8 +6,11 @@ import PropTypes from "prop-types";
 const CardShowcase = ({ _id, name, description, address, img, rate }) => {
   return (
     <LinkContainer to={`/showcases/${_id}`}>
-      <Card className="bg-dark text-white col-lg-6 border-white" role="button">
-        <Card.Img src={img} alt={name} />
+      <Card
+        className="bg-dark text-white col-lg-6 border-white showcase"
+        role="button"
+      >
+        <Card.Img src={img} />
         <div className="overlay position-absolute bg-dark opacity-50 w-100 h-100"></div>
         <Card.ImgOverlay className="d-flex align-items-start flex-column">
           <Card.Title className="d-flex w-100 mb-4">

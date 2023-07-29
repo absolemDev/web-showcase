@@ -52,7 +52,5 @@ export const getClassifireProducts = () => (state) =>
   state.classifireProducts.entities;
 export const getClassifireProductsLoadingStatus = () => (state) =>
   state.classifireProducts.isLoading;
-export const getClassifireProductsDataLoadedStatus = () => (state) =>
-  state.user.dataLoaded;
 
 export default classifireProductsReducer;

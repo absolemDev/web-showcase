@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { validator } from "../../utils/validator";
-import TextField from "../common/form/textField";
-import CheckBoxField from "../common/form/checkBoxField";
+import { validator } from "../../../utils/validator";
+import TextField from "../../common/form/textField";
+import CheckBoxField from "../../common/form/checkBoxField";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getServerError,
   getUsersLoadingStatus,
   signUp
-} from "../../store/user";
+} from "../../../store/user";
 import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -44,10 +44,10 @@ const RegisterForm = () => {
     },
     name: {
       isRequired: {
-        message: "Ник обязатен для заполнения"
+        message: "Имя обязатен для заполнения"
       },
       min: {
-        message: "Ник должно состоять минимум из 3 символов",
+        message: "Имя должно состоять минимум из 3 символов",
         value: 3
       }
     },

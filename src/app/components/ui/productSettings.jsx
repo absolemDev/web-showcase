@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { getProductsLoadingStatus, removeProduct } from "../../store/products";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryNameByClass } from "../../store/categories";
-import ProductForm from "./productForm";
+import ProductForm from "./form/productForm";
 
 const ProductSettings = ({ product, showcaseId, isEdit, onEdit, index }) => {
   const isLoading = useSelector(getProductsLoadingStatus());
@@ -29,7 +29,7 @@ const ProductSettings = ({ product, showcaseId, isEdit, onEdit, index }) => {
       {isEdit ? (
         <ProductForm
           product={product}
-          idShowcase={showcaseId}
+          showcaseId={showcaseId}
           index={index}
           onClose={handleCloseForm}
         />
@@ -39,7 +39,7 @@ const ProductSettings = ({ product, showcaseId, isEdit, onEdit, index }) => {
           <Col xs={3}>{product.name}</Col>
           <Col xs={5}>{categoryName}</Col>
           <Col xs={1}>{product.price}</Col>
-          <Col xs={2} className="d-flex justify-content-end p-0">
+          <Col xs={2} className="text-end p-0">
             <Button onClick={handleOpenForm} size="sm">
               <i className="bi bi-pencil-square"></i>
             </Button>
